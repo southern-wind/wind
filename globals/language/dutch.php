@@ -690,7 +690,17 @@ $lang = array(
 			'title' => 'Wijzigen IP adres',
 			'body' => 'In deze pagina kunt u toevoegen of een IP-adres bewerken voor uw node. Het \'Hostname\' veld beschrijft het apparaat dat bij het betreffende IP-adres behoort en moet hetzelfde zijn voor alle IP-adressen van dat apparaat'
 		),
-		
+
+                'node_editor_cname_add' => array(
+                        'title' => 'Toevoegen CNAME',
+                        'body' => 'Op deze pagina kunt u een CNAME voor uw node toevoegen. Het veld Hostnaam beschrijft het apparaat.'
+
+                ),
+                'node_editor_cname_edit' => array(
+                        'title' => 'Wijzigen CNAME',
+                        'body' => 'In deze pagina kunt u toevoegen of een CNAME bewerken voor uw node. Het \'Hostname\' veld beschrijft het apparaat.'
+                ),
+
 		'node_editor_services_add' => array(
 			'title' => 'Toevoegen dienst',
 			'body' => 'Op deze pagina kunt u een dienst van uw node toevoegen. Het veld IP-adres dient een IP-adres te bevatten waar de dienst naar luistert. Het URL-veld moet een link bevatten naar de dienst of een link naar een pagina over de dienst. Het protocol en de poort veld moeten het protocol bevatten (dwz TCP, UDP) en het poort-nummer waar de dienst gebruik van maakt'

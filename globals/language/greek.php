@@ -119,8 +119,8 @@ $lang = array(
 	'ip_address_edit' => "Επεξεργασία διεύθυνσης IP",
 	'ip_address_add' => "Προσθήκη διεύθυνσης IP",
 	'ip_addresses' => "Διευθύνσεις IP",
-        'ip_cname_edit' => "Edit CNAME",
-        'ip_cname_add' => "Add CNAME",
+        'ip_cname_edit' => "Επεξεργασία CNAME",
+        'ip_cname_add' => "Προσθήκη CNAME",
         'ip_cnames' => "CNAMEs",
 	'myview' => "Η οπτική του κόμβου",
 	'ip_ranges_search' => "Αναζήτηση IP Δικτύων",
@@ -364,10 +364,10 @@ $lang = array(
 		'ip_addresses__always_on-N' => 'ΟΧΙ',
 		'ip_addresses__info' => 'Πληροφορίες',
 
-                'ip_cname__date_in' => 'Added',
+                'ip_cname__date_in' => 'Προστέθηκε',
                 'ip_cname__hostname' => 'Hostname',
                 'ip_cname__cname' => 'CNAME',
-                'ip_cname__info' => 'Info',
+                'ip_cname__info' => 'Πληροφορίες',
 
 		'services__title' => 'Κατηγορία',
 		'services__protocol' => 'Πρωτόκολλο',
@@ -695,12 +695,12 @@ $lang = array(
 			'body' => 'Στη σελίδα αυτή μπορείτε να επεξεργαστείτε μία διεύθυνση IP του κόμβου σας. Το πεδίο Hostname, πρέπει να καθορίζει ποιο μηχάνημα φέρει τη συγκεκριμένη διεύθυνση IP και πρέπει να είναι κοινό σε όλες τις διευθύνσεις IP του συγκεκριμένου μηχανήματος.'
 		),
                 'node_editor_cname_add' => array(
-                        'title' => 'Add CNAME',
-                        'body' => 'In this page you can add a CNAME for a \'Hostname\' on your node. CNAME is the new (alternative) name for the hostname (as defined under IP addresses). Both should be added without trailing bits. I.e. without .ctwug.za.net.'
+                        'title' => 'Προσθήκη CNAME',
+                        'body' => 'Σε αυτή τη σελίδα μπορείτε να προσθέσετε μια εγγραφή CNAME για το όνομα του μηχανήματος στον κόμβο σας. CNAME είναι η νέα (εναλλακτική) όνομα για το όνομα κεντρικού υπολογιστή (όπως ορίζεται στο διευθύνσεις IP).'
                 ),
                 'node_editor_cname_edit' => array(
-                        'title' => 'Edit CNAME',
-                        'body' => 'In this page you can add or edit a CNAME address for a \'Hostname\' on your node.'
+                        'title' => 'Επεξεργασία CNAME',
+                        'body' => 'Σε αυτή τη σελίδα μπορείτε να προσθέσετε ή να επεξεργαστείτε μια διεύθυνση CNAME για το όνομα του μηχανήματος στον κόμβο σας.'
 
 		'node_editor_services_add' => array(
 			'title' => 'Προσθήκη υπηρεσίας',

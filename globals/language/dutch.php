@@ -116,6 +116,9 @@ $lang = array(
 	'ip_address_edit' => "IP adres wijzigen",
 	'ip_address_add' => "IP adres toevoegen",
 	'ip_addresses' => "IP adressen",
+        'ip_cname_edit' => "CNAME wijzigen",
+        'ip_cname_add' => "CNAME toevoegen",
+        'ip_cnames' => "CNAMEs",
 	'myview' => "Nodes Bekijken",
 	'ip_ranges_search' => "IP Netwerk zoeken",
 	'ip_ranges_found' => "IP Netwerk gevonden",
@@ -355,6 +358,11 @@ $lang = array(
 		'ip_addresses__always_on-Y' => 'Ja',
 		'ip_addresses__always_on-N' => 'Nee',
 		'ip_addresses__info' => 'Informatie',
+
+                'ip_cname__date_in' => 'Toegevoegd',
+                'ip_cname__hostname' => 'Hostname',
+                'ip_cname__cname' => 'CNAME',
+                'ip_cname__info' => 'Informatie',
 
 		'services__title' => 'Categorie',
 		'services__protocol' => 'Protocol',

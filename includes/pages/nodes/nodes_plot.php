@@ -45,9 +45,8 @@ class nodes_plot {
 		$point_b = new coordinate($b_node[0]['latitude'], $b_node[0]['longitude']);
 		if (!isset($_GET['frequency'])) {
                   //Get the AP frequency and use that
-                  $a_link_data = $db->get('frequency,type',
-                      'links', "node_id = '".get('a_node')."' and frequency > 0");
-                  $b_link_data = $db->get('frequency,type',                                                                                                 'links', "node_id = '".get('b_node')."' and frequency > 0");
+                  $a_link_data = $db->get('frequency,type','links', "node_id = '".get('a_node')."' and frequency > 0");
+                  $b_link_data = $db->get('frequency,type','links', "node_id = '".get('b_node')."' and frequency > 0");
                   $apFreq = ($a_link_data[0]['type'] == 'ap'?$a_link_data[0]['frequency']
                       :($b_link_data[0]['type'] == 'ap'?$b_link_data[0]['frequency']:''));
                   if ($apFreq > 0) {
@@ -55,7 +54,7 @@ class nodes_plot {
                   }
 		}
 		$image = $geoimage->plotlink($width, $height, $point_a, $point_b, (integer)$a_node[0]['elevation'], (integer)$b_node[0]['elevation']);
-		
+
 		header('Content-type: image/png');
 		imagepng($image);
 		exit;

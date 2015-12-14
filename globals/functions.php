@@ -442,13 +442,27 @@ function validate_name_ns($name, $node) {
 	global $db;
 	$name = str_replace("_", "-", $name);
 	$name = strtolower($name);
-	$allowchars = 'abcdefghijklmnopqrstuvwxyz0123456789-';
+        $allowendchars = 'abcdefghijklmnopqrstuvwxyz0123456789'; // chars allowed both ends of name
+	$allowchars = $allowendchars.'-'; // also allow - in name but not at ends.
 	$ret = '';
+        // Process valid chars
 	for ($i=0; $i<strlen($name); $i++) {
 		$char = substr($name, $i, 1);
 		if (strstr($allowchars, $char) !== FALSE) $ret .= $char;
 	}
-	if ($ret == '') $ret = 'noname';
+	// Drop off invalid chars from start of string
+        while (strlen($ret)>0 && strstr($allowendchars,substr($ret,0,1)) == FALSE) {
+		$ret = substr($ret,1);
+	}
+        // Drop off invalid chars from end of string
+        while (strlen($ret)>0 && strstr($allowendchars,substr($ret,-1)) == FALSE) {
+                $ret = substr($ret,0,strlen($ret)-1);
+        }
+	// If nothing left default to noname
+        if ($ret == FALSE || $ret == '') $ret = 'noname';
+	// Limit length to 48
+	$ret = substr($ret,0,48);
+	// Check if string already is used and add extension if used.
 	$i=2;
 	$extension = '';
 	do {

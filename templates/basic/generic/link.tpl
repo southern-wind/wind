@@ -22,8 +22,8 @@
 <div class="panel-heading">
 <h3 class="panel-title">{$lang.node_los_view}</h3>
 </div>
-<p style="font-weight:bold; font-size: 1em; color: orange;">
-<a href="?page=nodes&subpage=list&a_node={$node.id}">{$lang.node_plot_ap_list}</a></p>
-<span style="font-weight:bold; font-size: 1em; color: orange;">
-<a href="?page=nodes&subpage=list&a_node={$node.id}&showall=1">{$lang.node_plot_list}</a></span>
+<div class="content panel-body" style='text-align:center'>
+</p><a class='btn btn-default' href="?page=nodes&subpage=list&a_node={$node.id}">{$lang.node_plot_ap_list}</a></p>
+<a class='btn btn-default' href="?page=nodes&subpage=list&a_node={$node.id}&showall=1">{$lang.node_plot_list}</a>
+</div>
 </div>

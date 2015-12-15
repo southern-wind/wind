@@ -119,6 +119,9 @@ $lang = array(
 	'ip_address_edit' => "IP adres wijzigen",
 	'ip_address_add' => "IP adres toevoegen",
 	'ip_addresses' => "IP adressen",
+        'ip_cname_edit' => "CNAME wijzigen",
+        'ip_cname_add' => "CNAME toevoegen",
+        'ip_cnames' => "CNAMEs",
 	'myview' => "Nodes Bekijken",
 	'ip_ranges_search' => "IP Netwerk zoeken",
 	'ip_ranges_found' => "IP Netwerk gevonden",
@@ -358,6 +361,11 @@ $lang = array(
 		'ip_addresses__always_on-Y' => 'Ja',
 		'ip_addresses__always_on-N' => 'Nee',
 		'ip_addresses__info' => 'Informatie',
+
+                'ip_cname__date_in' => 'Toegevoegd',
+                'ip_cname__hostname' => 'Hostname',
+                'ip_cname__cname' => 'CNAME',
+                'ip_cname__info' => 'Informatie',
 
 		'services__title' => 'Categorie',
 		'services__protocol' => 'Protocol',
@@ -685,7 +693,17 @@ $lang = array(
 			'title' => 'Wijzigen IP adres',
 			'body' => 'In deze pagina kunt u toevoegen of een IP-adres bewerken voor uw node. Het \'Hostname\' veld beschrijft het apparaat dat bij het betreffende IP-adres behoort en moet hetzelfde zijn voor alle IP-adressen van dat apparaat'
 		),
-		
+
+                'node_editor_cname_add' => array(
+                        'title' => 'Toevoegen CNAME',
+                        'body' => 'Op deze pagina kunt u een CNAME voor uw node toevoegen. Het veld Hostnaam beschrijft het apparaat.'
+
+                ),
+                'node_editor_cname_edit' => array(
+                        'title' => 'Wijzigen CNAME',
+                        'body' => 'In deze pagina kunt u toevoegen of een CNAME bewerken voor uw node. Het \'Hostname\' veld beschrijft het apparaat.'
+                ),
+
 		'node_editor_services_add' => array(
 			'title' => 'Toevoegen dienst',
 			'body' => 'Op deze pagina kunt u een dienst van uw node toevoegen. Het veld IP-adres dient een IP-adres te bevatten waar de dienst naar luistert. Het URL-veld moet een link bevatten naar de dienst of een link naar een pagina over de dienst. Het protocol en de poort veld moeten het protocol bevatten (dwz TCP, UDP) en het poort-nummer waar de dienst gebruik van maakt'

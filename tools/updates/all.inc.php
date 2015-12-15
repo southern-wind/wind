@@ -19,4 +19,5 @@
 
 return array(
 	include dirname(__FILE__) . "/schema-v1.1.inc.php",
+	include dirname(__FILE__) . "/schema-v1.2.inc.php",
 );

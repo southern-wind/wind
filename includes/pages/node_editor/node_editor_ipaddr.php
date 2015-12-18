@@ -50,6 +50,7 @@ class node_editor_ipaddr {
 		$ipaddr = get('ipaddr');
 		$ret = TRUE;
 		$_POST['ip_addresses__ip'] = ip2long($_POST['ip_addresses__ip']);
+		$_POST['ip_addresses__hostname'] = validate_hostname($_POST['ip_addresses__hostname']);
 		$ret = $form_ipaddr->db_set(array('node_id' => intval(get('node'))),
 								"ip_addresses", "id", $ipaddr);
 		

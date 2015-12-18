@@ -440,15 +440,10 @@ function validate_zone($name) {
 
 function validate_name_ns($name, $node) {
 	global $db;
-	$name = str_replace("_", "-", $name);
-	$name = strtolower($name);
-	$allowchars = 'abcdefghijklmnopqrstuvwxyz0123456789-';
-	$ret = '';
-	for ($i=0; $i<strlen($name); $i++) {
-		$char = substr($name, $i, 1);
-		if (strstr($allowchars, $char) !== FALSE) $ret .= $char;
-	}
-	if ($ret == '') $ret = 'noname';
+	// Validate as per hostname
+	$ret = validate_hostname($name);
+
+	// Check if string already is used and add extension if used.
 	$i=2;
 	$extension = '';
 	do {
@@ -460,6 +455,33 @@ function validate_name_ns($name, $node) {
 	} while ($cnt > 0);
 	return ($extension != '' ? $ret.$extension : $ret);
 }
+
+function validate_hostname($name) {
+        $name = str_replace("_", "-", $name);
+        $name = strtolower($name);
+        $allowendchars = 'abcdefghijklmnopqrstuvwxyz0123456789'; // chars allowed both ends of name
+        $allowchars = $allowendchars.'.-'; // also allow - in name but not at ends.
+        $ret = '';
+        // Process valid chars
+        for ($i=0; $i<strlen($name); $i++) {
+                $char = substr($name, $i, 1);
+                if (strstr($allowchars, $char) !== FALSE) $ret .= $char;
+        }
+        // Drop off invalid chars from start of string
+        while (strlen($ret)>0 && strstr($allowendchars,substr($ret,0,1)) == FALSE) {
+                $ret = substr($ret,1);
+        }
+        // Drop off invalid chars from end of string
+        while (strlen($ret)>0 && strstr($allowendchars,substr($ret,-1)) == FALSE) {
+                $ret = substr($ret,0,strlen($ret)-1);
+        }
+        // If nothing left default to noname
+        if ($ret == FALSE || $ret == '') $ret = 'noname';
+        // Limit length to 48
+        $ret = substr($ret,0,48);
+	return $ret;
+}
+
 
 function is_ip($ip, $full_ip=TRUE) {
 	$ip_ex = explode(".", $ip, 4);

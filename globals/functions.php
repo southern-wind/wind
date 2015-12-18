@@ -460,7 +460,7 @@ function validate_hostname($name) {
         $name = str_replace("_", "-", $name);
         $name = strtolower($name);
         $allowendchars = 'abcdefghijklmnopqrstuvwxyz0123456789'; // chars allowed both ends of name
-        $allowchars = $allowendchars.'-'; // also allow - in name but not at ends.
+        $allowchars = $allowendchars.'.-'; // also allow - in name but not at ends.
         $ret = '';
         // Process valid chars
         for ($i=0; $i<strlen($name); $i++) {

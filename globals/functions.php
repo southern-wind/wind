@@ -385,7 +385,8 @@ function sendmail($to, $subject, $body, $from_name='', $from_email='', $cc_to_se
 	$headers .= "MIME-Version: 1.0\n";
 	$headers .= 'Content-Type: text/plain; charset='.$lang['charset']."\n";
 	$headers .= 'Content-Transfer-Encoding: '.(is8bit($body) ? '8bit' : '7bit');
-	return @mail($to, $subject, $body, $headers);
+	$additional='-f<'.$vars['mail']['from'].'>';
+	return @mail($to, $subject, $body, $headers, $additional);
 }
 
 function ip_to_ranges($ip, $ret_null=TRUE) {

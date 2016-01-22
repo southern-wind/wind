@@ -20,11 +20,13 @@
 <head>
 	<meta charset="{$lang.charset}"/>
 	<meta id="windViewport" name="viewport" content="width = 740">
-+       <script>
-+       if (screen.width > 740) {
-+       var mvp = document.getElementById('windViewport');
-+       mvp.setAttribute('content','width=1200');}
-+       </script>	
+        <script>
+        {literal}
+        if (screen.width > 740) {
+        var mvp = document.getElementById('windViewport');
+        mvp.setAttribute('content','width=1200');}
+        {literal}
+        </script>	
 	<script type="text/javascript" src="{$js_dir}/jquery-1.9.1.js"></script>
 	<script type="text/javascript" src="{$js_dir}/jquery-ui-1.10.3.custom.min.js"></script>
 	<script type="text/javascript" src="{$js_dir}/ui.js"></script>

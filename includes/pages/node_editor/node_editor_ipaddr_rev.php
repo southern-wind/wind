@@ -55,6 +55,7 @@ class node_editor_ipaddr_rev {
                 $ipaddr_rev = get('ipaddr_rev');
                 $ret = TRUE;
                 $_POST['ip_addresses__ip'] = ip2long($_POST['ip_addresses__ip']);
+                $_POST['ip_addresses__hostname'] = validate_hostname($_POST['ip_addresses__hostname']);
                 $ret = $form_ipaddr_rev->db_set(array('node_id' => intval(get('node'))),
                                 "ip_addresses", "id", $ipaddr_rev);
 

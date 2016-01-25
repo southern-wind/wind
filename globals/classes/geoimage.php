@@ -36,8 +36,8 @@ class geoimage {
 		$distance = $geocalc->GCDistance($point_a->lat, $point_a->lon, $point_b->lat, $point_b->lon) * 1000;
 	
 		$image = imagecreate($width, $height);
-		$ground_pad = $height * (1 / 20);
-		$sky_pad = $height * (1 / 20);
+		$ground_pad = $height * 0.1;
+		$sky_pad = $height * 0.1;
 		$left_pad = 0;
 		$right_pad = 0;
 		
@@ -56,9 +56,12 @@ class geoimage {
 		for ($i=0;$i<$width;$i++) {
 			$elevations[$i] = $srtm->get_elevation($point_a->lat + $step_lat * $i, $point_a->lon + $step_log * $i, FALSE);
 			if ($point_a->lat == '' || $point_a->lon == '' || $point_b->lat == '' || $point_b->lon == '' || $elevations[$i] === FALSE) {
-				imagestring ($image, 5, 10, 10, "Data error!", $black);
-				return $image;
+				imagestring ($image, 5, 10, 10, "Data error! A:$point_a->lat || $point_a->lon", $black);
+                                imagestring ($image, 5, 10, 30, "B: $point_b->lat || $point_b->lon",$black);
+                                imagestring ($image, 5, 10, 50, $elevations[$i] ." === FALSE", $black);
+                                return $image;
 			}
+			//If lower 3.2km below sea level reset to previous depth/height.
 			if ($elevations[$i] < -32000) {
 				$elevations[$i] = $elevations[$i-1];
 			}

@@ -322,8 +322,8 @@ NetworkMap.prototype._downloadTopology = function(focus_selected) {
 			// GeoJSON inherits all properties + extra
 			var properties = jQuery.extend({}, link);
 			properties['color'] = (link['status'] == 'active')
-				?'#0099FF'
-				:'#ff0000';
+				?'#0099FF' //blue link color
+				:'#FF8C95'; //red link color
 			
 			return {
 				'type' : "Feature",

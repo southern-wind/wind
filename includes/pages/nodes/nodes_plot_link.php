@@ -95,6 +95,8 @@ class nodes_plot_link {
 			$c = 299792.458; // light speed in km
 			$this->tpl['fsl'] = 20 * log10(4 * pi() * $this->tpl['distance'] * ($frequency / $c));
 			
+			//Fix path so image displays.
+			$this->tpl['nodes_pickup_link'] = make_ref('/pickup/nodes');
 			$this->tpl['plot_image'] = make_ref('/nodes/plot', array("a_node" => $this->tpl['a_node'], "b_node" => $this->tpl['b_node'], "frequency" => $this->tpl['frequency']));
 		}
 		

@@ -477,6 +477,7 @@ class node_editor {
 				}
 				$this->tpl['table_subnets'] = $construct->table($this->table_subnets(), __FILE__);
 				$this->tpl['table_ipaddr'] = $construct->table($this->table_ipaddr(), __FILE__);
+				$this->tpl['table_ipaddr_rev'] = $construct->table($this->table_ipaddr_rev(), __FILE__);
 				$this->tpl['table_cname'] = $construct->table($this->table_cname(), __FILE__);
 				$this->tpl['table_services'] = $construct->table($this->table_services(), __FILE__);
 				$this->tpl['table_nodesettingschanges'] = $construct->table($this->table_nodesettingschanges(), __FILE__);
@@ -492,6 +493,7 @@ class node_editor {
 				$this->tpl['link_link_add'] = make_ref('/node_editor/link', array('node' => get('node'), 'link' => 'add'));
 				$this->tpl['link_subnet_add'] = make_ref('/node_editor/subnet', array('node' => get('node'), 'subnet' => 'add'));
 				$this->tpl['link_ipaddr_add'] = make_ref('node_editor/ipaddr', array('node' => get('node'), 'ipaddr' => 'add'));
+				$this->tpl['link_ipaddr_rev_add'] = make_ref('node_editor/ipaddr_rev', array('node' => get('node'), 'ipaddr_rev' => 'add'));
 				$this->tpl['link_cname_add'] = make_ref('node_editor/cname', array('node' => get('node'), 'cname' => 'add'));
 				$this->tpl['link_services_add'] = make_ref('/node_editor/services', array('node' => get('node'), 'service' => 'add'));
 				$this->tpl['link_nodesettingschanges_add'] = make_ref('/node_editor/nodesettingschanges', array('node' => get('node'), 'nodesettingschanges' => 'add'));
@@ -673,6 +675,19 @@ class node_editor {
 		}
 	}
 	
+	function output_onpost_table_ipaddr_rev() {
+                global $db, $main;
+                $ret = TRUE;
+                foreach( (array) $_POST['id'] as $key => $value) {
+                        $ret = $ret && $db->del("ip_addresses", '', "id = '".intval($value)."' AND node_id = ".intval(get('node')));
+                }
+                if ($ret) {
+                        $main->message->set_fromlang('info', 'delete_success', self_ref());
+                } else {
+                        $main->message->set_fromlang('error', 'generic');
+                }
+        }
+
         function output_onpost_table_cname() {
                 global $db, $main;
                 $ret = TRUE;

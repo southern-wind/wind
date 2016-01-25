@@ -265,7 +265,7 @@ class node_editor {
 		$table_ipaddr->db_data(
 			'ip_addresses.id, ip_addresses.hostname, ip_addresses.ip, ip_addresses.mac, ip_addresses.type, ip_addresses.always_on',
 			'ip_addresses',
-			'ip_addresses.node_id = '.intval(get('node')),
+			'ip_addresses.node_id = "'.intval(get('node')).'" and zone_type = "forward"',
 			"",
 			"ip_addresses.ip ASC");
 		foreach( (array) $table_ipaddr->data as $key => $value) {
@@ -285,6 +285,34 @@ class node_editor {
 		$table_ipaddr->db_data_translate('ip_addresses__type', 'ip_addresses__always_on');
 		return $table_ipaddr;
 	}
+
+	function table_ipaddr_rev() {
+		                global $construct, $db;
+                $table_ipaddr_rev = new table(array('TABLE_NAME' => 'table_ipaddr_rev', 'FORM_NAME' => 'table_ipaddr_rev'));
+                $table_ipaddr_rev->db_data(
+                        'ip_addresses.id, ip_addresses.hostname, ip_addresses.ip, ip_addresses.mac, ip_addresses.type, ip_addresses.always_on',
+                        'ip_addresses',
+                        'ip_addresses.node_id = "'.intval(get('node')).'" and zone_type = "reverse"',
+                        "",
+                        "ip_addresses.ip ASC");
+                foreach( (array) $table_ipaddr_rev->data as $key => $value) {
+                        if ($key != 0) {
+                                $table_ipaddr_rev->data[$key]['ip'] = long2ip($table_ipaddr_rev->data[$key]['ip']);
+                        }
+                }
+                $table_ipaddr_rev->db_data_multichoice('ip_addresses', 'id');
+                for($i=1;$i<count($table_ipaddr_rev->data);$i++) {
+                        if (isset($table_ipaddr_rev->data[$i])) {
+                                $table_ipaddr_rev->info['EDIT'][$i] = make_ref('/node_editor/ipaddr_rev',
+                                        array('node' => intval(get('node')), "ipaddr_rev" => $table_ipaddr_rev->data[$i]['id']));
+                        }
+                }
+                $table_ipaddr_rev->info['EDIT_COLUMN'] = 'hostname';
+                $table_ipaddr_rev->info['MULTICHOICE_LABEL'] = 'delete';
+                $table_ipaddr_rev->db_data_remove('id');
+                $table_ipaddr_rev->db_data_translate('ip_addresses__type', 'ip_addresses__always_on');
+                return $table_ipaddr_rev;
+        }
 
         function table_cname() {
                 global $construct, $db;

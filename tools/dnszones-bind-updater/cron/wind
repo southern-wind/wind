@@ -1,0 +1,14 @@
+#
+# Wind DNS updater
+#
+MAILTO=root
+
+######
+# m h dom mon dow user  command
+######
+#
+# only when zone changes happen that it will push them out.
+
+WINDPATH='/dir/to/wind/'
+
+*/2 * * * * WindUser $WINDPATH/tools/dnszones-bind-updater/zone_update > /dev/null 2>&1

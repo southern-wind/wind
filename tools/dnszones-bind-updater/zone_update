@@ -1,12 +1,13 @@
 #!/bin/bash
-# zone_update bash script Version 0.8
+# zone_update bash script Version 1
 # Copyleft 2005 - Ernest0x (ernest0x at yahoo dot gr)
+# Copyleft 2016 - JammiN
 
 # Discription
 # -----------
 # If it is needed, this script  updates a DNS zone file from another 
 # php-generated zone file. 
-# It is meant to be used by the WiND project (http://wind.cube.gr).
+# It is meant to be used by the Southern-WiND project (https://github.com/southern-wind/wind).
 
 
 # Notes
@@ -15,171 +16,35 @@
 #   line that contains a "; serial" comment string. This line gives its place to 
 #   a new serial line, constructed by this script.
 
+
+####
+# Nothing to configure here. See "./zone_global_settings.sh"
+#
+# If zone updates aren't getting pushed, then check all the server indexs in "./zone_global_settings.sh"
+
+
+###IMPORT GLOBAL VARIABLES
+. $(dirname $0)/zone_global_settings.sh
+
 DEBUG="false";
-EMAIL='ben@jolly.so';
 
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11
-
-# Root path for zone files
-#_THIS SHOULD BE CHANGED TO THE PATH WHERE DNS ZONE FILES ARE STORED_.
-#ZONES_ROOT="/var/www/wind/tools/test/zones/"
-#ZONES_ROOT="/etc/bind/zones/"
-SOURCE=$( dirname "${BASH_SOURCE[0]}" )
-
-LOG=$SOURCE/log/anycast_update.log
-
-#echo $SOURCE;
-ZONES_ROOT="$SOURCE/zones/";
-#ZONES_ROOT="$SOURCE/zones/";
+LOG=$LOCATION/log/anycast_update.log
+ZONES_ROOT="$LOCATION/zones/";
 
 # The php script to generate the new zone file. 
-#_THIS SHOULD BE CHANGED TO YOUR PHP SCRIPT_.
-#PHP_SCRIPT="/usr/local/lib/zones-poller/zones-poller.php"
-#PHP_SCRIPT="/var/www/wind/tools/test/dnszones-poller/dnszones-poller.php"
-PHP_SCRIPT="$SOURCE/dnszones-poller/dnszones-poller.php";
+PHP_SCRIPT="$LOCATION/dnszones-poller/dnszones-poller.php";
+
+## Check each zone for updates.
+for i in "${ZONES[@]}"
+do
 
 # The current zone file (just the filename, not the fullpath).
 # This is given as an argument when calling the script.
-CUR_ZONE=${1}
+CUR_ZONE=$i
 
 echo "$(date) Starting zone update for $CUR_ZONE ..." >> $LOG
 
-# Check that an existing file was passed as an argument by the caller.
-if [ -z $CUR_ZONE ]; then
-   echo "Usage: $0 ZONE_FILENAME"
-   exit
-fi
+$(createNewZone);
 
-if [ ! -e $ZONES_ROOT$CUR_ZONE ]; then
-   echo "file '$ZONES_ROOT$CUR_ZONE' does not exist" 1>&2
-   exit
-fi
-
-# Check the syntax of the current zone file and make sure it includes "; serial" line
-#echo $CUR_ZONE $ZONES_ROOT$CUR_ZONE;
-if ! ( named-checkzone -q $CUR_ZONE $ZONES_ROOT$CUR_ZONE && grep -q "; serial" $ZONES_ROOT$CUR_ZONE ) ; then
-   echo "`date` - $ZONES_ROOT$CUR_ZONE has errors (wrong syntax or  missing '; serial' comment)." 1>&2
-   echo "#### START of named-checkzone output (if OK then '; serial' comment is missing) ####" 1>&2
-   echo "`named-checkzone $CUR_ZONE $ZONES_ROOT$CUR_ZONE`" 1>&2
-   echo "#### END of named-checkzone output ####" 1>&2
-   exit
-fi
- 
-# Where we will temporarily save the php-generated zone file.
-PHP_ZONE="/tmp/php-zone"
-
-# Where we will temporarily save the stripped (without the "serial" line) current zone file.
-CUR_ZONE_S="/tmp/cur-zone-s"
-
-# Where we will temporarily save the stripped (without the "serial" line) php-generated zone file.
-PHP_ZONE_S="/tmp/php-zone-s"
-
-# Make PHP_ZONE
-#cd `dirname $PHP_SCRIPT`
-cd $SOURCE
-php $PHP_SCRIPT $CUR_ZONE > $PHP_ZONE
-# Extract the serial number of the current zone file.
-# Remember to change '2' to '3' on the next millenium change. :P
-CUR_SERIAL=`grep "; serial" $ZONES_ROOT$CUR_ZONE | grep -o "2........."`
-
-# Check the validity of CUR_SERIAL
-CUR_SERIAL_CHARS=`echo -n $CUR_SERIAL | wc -m`
-if [ $CUR_SERIAL_CHARS -ne 10 ] || ! date -d `echo $CUR_SERIAL | cut -c 1-8` > /dev/null 2>&1 ; then
-    echo "`date` - Serial line in $ZONES_ROOT$CUR_ZONE is not valid." 1>&2
-    exit
-fi
-
-# Day Of CUR_SERIAL
-DCS=`echo $CUR_SERIAL | tail -c +7 | head -c 2`
-
-# Version of CUR_SERIAL
-VCS=`echo $CUR_SERIAL | tail -c +9`
-
-# If it is less than or equal to 9 delete leading zero (so that 08 or less is not interpreted as octal)
-if [ $VCS -le 9 ]; then
-  if [ $VCS -ne 0 ]; then
-     VCS=`echo $VCS|tr -d 0`
-  else
-     VCS=0
-  fi
-fi
-
-# Remove "serial" lines.
-grep -v "; serial" $ZONES_ROOT$CUR_ZONE > $CUR_ZONE_S
-grep -v "; serial" $PHP_ZONE > $PHP_ZONE_S
-
-# If stripped versions of current zone file and php-generated zone file are identical, remove temp files and exit.
-# Else, replace current zone file with the php-generated zone file and include the proper serial line.
-if diff $CUR_ZONE_S $PHP_ZONE_S > /dev/null ; then
-  if [ $DEBUG == "true" ]; then
-	echo "debug: no changes, exiting.";
-  fi
-  echo "No changes $CUR_ZONE" >> $LOG
-  rm -f $PHP_ZONE $CUR_ZONE_S $PHP_ZONE_S
-  exit
-else
-  # Verion of Serial to Append.
-  VSA="00"
-  
-  # Day of the Month, Now.
-  DMN=`date +"%d"`
-  
-  # If day has not changed append previous serial version incremented by 1.
-  if [ "$DMN" -eq "$DCS" ]; then
-     let VSA=VCS+1
-     
-     # if VSA is less than or equal to 9, prepend a '0' to make it a 2 digit number.
-     if [ "$VSA" -le 9 ]; then
-        VSA="0$VSA"
-     fi
-  fi
-  
-  # The new serial.
-  NEW_SERIAL=`date +"%Y%m%d"`$VSA
-  
-  # Serial Line Number.
-  SLN=`grep -n "; serial" $PHP_ZONE | head  -c 1`
-  # Line Number Before Serial.
-  let LNBS=SLN-1
-  # Line Number After Serial.
-  let LNAS=SLN+1
-  
-  # Build the final zone file
-  head -n $LNBS $PHP_ZONE > /tmp/$CUR_ZONE
-  echo "				$NEW_SERIAL ; serial" >> /tmp/$CUR_ZONE
-  tail -n +$LNAS $PHP_ZONE >> /tmp/$CUR_ZONE
-
-  # Check that the final zone file describes correclty its zone
-   UNIXTIMESTAMP=`date +%s`
-  if named-checkzone -q $CUR_ZONE /tmp/$CUR_ZONE ; then
-     mv -f /tmp/$CUR_ZONE $ZONES_ROOT/archive/$CUR_ZONE-$UNIXTIMESTAMP
-     cp  $ZONES_ROOT/archive/$CUR_ZONE-$UNIXTIMESTAMP  $ZONES_ROOT/$CUR_ZONE
-	## Now move to each server.
-	#SOURCE=$( dirname "${BASH_SOURCE[0]}" )
-	echo "new zone info, starting zone push" >> $LOG	
-	$SOURCE/zone_push2anycast
-  else
-     echo "`date` - PHP-generated file has errors (possible database failure)" 1>&2
-     echo "#### START of named-checkzone output ####" 1>&2
-     echo "`named-checkzone -d $CUR_ZONE /tmp/$CUR_ZONE`" 1>&2
-     echo "#### END of named-checkzone output ####" 1>&2
-	# Backup file before its lost.
-     cp -f /tmp/$CUR_ZONE $ZONES_ROOT/broken/$CUR_ZONE-broken-$UNIXTIMESTAMP
-     if [ $DEBUG == "true" ]; then
-        echo "debug: ERROR zones files has errors - see file";
-	echo "debug: $ZONES_ROOT/broken/$CUR_ZONE-broken-$UNIXTIMESTAMP";
-     fi 
-     rm -f $PHP_ZONE $CUR_ZONE_S $PHP_ZONE_S /tmp/$CUR_ZONE
-     echo "Broken ZONE file made. please investigate.
-	/tmp/$CUR_ZONE $ZONES_ROOT/broken/$CUR_ZONE-broken-$UNIXTIMESTAMP
-	" | mail $EMAIL -s 'wind dns zone generation failure'
-     exit
-     fi
-
-# Reload zone files in dns server
-# rndc reload
-
-     fi
-
-# Remove temp files.
-#rm -f $PHP_ZONE $CUR_ZONE_S $PHP_ZONE_S /tmp/$CUR_ZONE
+done; #end Loop

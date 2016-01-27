@@ -1,4 +1,4 @@
-ND ANYCAST ZONE CREATION TOOL
+WiND ANYCAST ZONE CREATION TOOL
 # 2016-01-27 - Initial Release, as used by WAFN - JammiN
 
 Once enabled via CRON, this tool will pull DNS records from WiND

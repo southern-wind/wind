@@ -1,3 +1,4 @@
+//Schema V1.3
 
 CREATE TABLE IF NOT EXISTS `update_log` (
   `version_major` int unsigned NOT NULL,
@@ -95,12 +96,25 @@ CREATE TABLE IF NOT EXISTS `ip_addresses` (
   `type` enum('router','server','pc','wireless-bridge','voip','camera','other') NOT NULL default 'pc',
   `always_on` enum('Y','N') NOT NULL default 'N',
   `info` text,
-  `zone_type` enum('forward', 'reverse') NOT NULL default 'forward',
+  `zone_type` enum('forward', 'reverse', 'cnames') NOT NULL default 'forward',
   PRIMARY KEY  (`id`),
   KEY `ip` (`ip`),
   KEY `node_id` (`node_id`),
   KEY `hostname` (`hostname`),
   KEY `type` (`type`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ip_cname` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `date_in` datetime NOT NULL default '0000-00-00 00:00:00',
+  `node_id` int(10) unsigned NOT NULL default '0',
+  `hostname` varchar(50) NOT NULL default '',
+  `cname` varchar(50) NOT NULL default '',
+  `info` text,
+  PRIMARY KEY  (`id`),
+  KEY `cname` (`cname`),
+  KEY `node_id` (`node_id`),
+  KEY `hostname` (`hostname`),
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ip_ranges` (

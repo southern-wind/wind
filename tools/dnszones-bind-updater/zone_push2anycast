@@ -1,0 +1,91 @@
+#!/bin/bash
+
+#jammin
+servers[0]="10.60.24.220";
+user[0]="root";
+dir[0]="/etc/bind/anycast/";
+chown[0]="root:root";
+
+#Roleystone
+servers[1]="10.60.0.5";
+user[1]="root";
+dir[1]="/etc/bind/anycast/";
+chown[1]=${chown[0]};
+
+#rockingham
+#servers[2]="10.60.8.2";
+#user[2]="root";
+#dir[2]="/etc/bind/anycast/";
+#chown[2]=${chown[0]};
+
+#wanneroo
+servers[2]="10.60.131.226";
+user[2]="root";
+dir[2]="/etc/bind/anycast/";
+chown[2]=${chown[0]};
+
+#folken (10.60.36.1) - ACL blocked
+#servers[4]="shell.dark.net.au";
+#servers[4]="10.60.36.1";
+#user[4]="jammin";
+#dir[4]="/etc/bind/anycast/";
+#chown[4]="jammin:wafn";
+
+# Whom to email in the event of it failing.
+EMAIL='ben@jolly.so';
+index=0;
+
+# Count how many to loop on.
+element_count=${#servers[@]};
+((element_count++))
+TIMEOUT=10;
+RSYNC_TIMEOUT="-e \\\"ssh -o ConnectTimeout=$TIMEOUT\\\"";
+SOURCE=$( dirname "${BASH_SOURCE[0]}" )
+
+LOG=$SOURCE/log/anycast_update.log
+
+cd $SOURCE;
+
+while [ "$index" -lt "$element_count" ]
+do    # List all the elements in the array.
+  if [[ ${servers[$index]} =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
+  echo "Rsync starting ${servers[$index]} $(date)" >>  $LOG
+  #echo "rsync $RSYNC_TIMEOUT -a -O --chown=${chown[$index]} zones/* ${user[$index]}@${servers[$index]}:${dir[$index]};" >> $LOG
+  echo rsync -e \"ssh -o ConnectTimeout=$TIMEOUT\" -ptgoO --chown=${chown[$index]} zones/* ${user[$index]}@${servers[$index]}:${dir[$index]} >> $LOG 2>> $LOG
+  #set -x
+  rsync -e "ssh -o ConnectTimeout=$TIMEOUT" -ptgoO --chown=${chown[$index]} zones/* ${user[$index]}@${servers[$index]}:${dir[$index]} >> $LOG 2>> $LOG
+  RESULT=$?;
+  #set +x
+  #echo "Result is $RESULT";
+  if [ $RESULT -eq 0 ]; then
+    echo "ssh -o ConnectTimeout=$TIMEOUT ${user[$index]}@${servers[$index]} rndc reload" >> $LOG
+    ssh -o ConnectTimeout=$TIMEOUT ${user[$index]}@${servers[$index]} rndc reload >> $LOG
+  else
+    echo "failed rsync to ${servers[$index]}" >> $LOG
+    echo "Failed to rsync to ${servers[$index]} ERROR = $RESULT
+
+       1      Syntax or usage error
+       2      Protocol incompatibility
+       3      Errors selecting input/output files, dirs
+       4      Requested  action not supported: an attempt was made to manipulate 64-bit files on a platform 
+              that cannot support them; or an option was specified that is supported by the client and not by the server.
+       5      Error starting client-server protocol
+       6      Daemon unable to append to log-file
+       10     Error in socket I/O
+       11     Error in file I/O
+       12     Error in rsync protocol data stream
+       13     Errors with program diagnostics
+       14     Error in IPC code
+       20     Received SIGUSR1 or SIGINT
+       21     Some error returned by waitpid()
+       22     Error allocating core memory buffers
+       23     Partial transfer due to error - Folder permissions perhaps?
+       24     Partial transfer due to vanished source files
+       25     The --max-delete limit stopped deletions
+       30     Timeout in data send/receive
+       35     Timeout waiting for daemon connection
+	" | mail $EMAIL -s 'wind dns update failure'
+  fi 
+  fi #End of valid ip.
+  ((index++))
+done

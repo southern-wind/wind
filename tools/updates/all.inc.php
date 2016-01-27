@@ -19,5 +19,8 @@
 
 return array(
 	include dirname(__FILE__) . "/schema-v1.1.inc.php",
+	//CNAME Zones
 	include dirname(__FILE__) . "/schema-v1.2.inc.php",
+	//Reverse Zones
+	include dirname(__FILE__) . "/schema-v1.3.inc.php"
 );

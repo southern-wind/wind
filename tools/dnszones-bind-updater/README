@@ -17,7 +17,7 @@ Configure the following files as needed:
 "zone_global_settings.sh"
 "cron/wind" 
 
-For each domain listed in the $ZONES array in "zone_global_settings.sh" do the following
+For each TLD Zone listed in the $ZONES array in "zone_global_settings.sh" do the following
   For a forward zone:
 	In folder "dnszones-poller" copy the forward-example.conf and forward-example.schema
 	Modify the copied file to suit your Zone and DB.

@@ -95,6 +95,7 @@ CREATE TABLE IF NOT EXISTS `ip_addresses` (
   `type` enum('router','server','pc','wireless-bridge','voip','camera','other') NOT NULL default 'pc',
   `always_on` enum('Y','N') NOT NULL default 'N',
   `info` text,
+  `zone_type` enum('forward', 'reverse') NOT NULL default 'forward',
   PRIMARY KEY  (`id`),
   KEY `ip` (`ip`),
   KEY `node_id` (`node_id`),

@@ -21,7 +21,7 @@ $update = new DBUpdateDescriptor(new SchemaVersion(1,2), new SchemaVersion(1,3))
  *         ip_addresses database changes          */
 
 // column for zone_types
-$update->newColumn('ip_addresses', 'zone_type', 'enum('forward', 'reverse', 'cname')', array(
+$update->newColumn('ip_addresses', 'zone_type', 'enum('forward', 'reverse')', array(
                 'default' => 'forward'));
 
 return $update;

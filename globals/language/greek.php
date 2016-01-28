@@ -17,6 +17,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/*****
+*
+*  DONT EDIT THIS FILE FOR YOUR COMMUNITY PAGE!!
+*  See config/language/LANGUAGE_overwrite.php as per the github WIKI.
+*
+*****/
+
 /* el_GR.utf8 for GNU/Linux - ell for Windows */
 setlocale(LC_ALL, 'el_GR.utf8', 'ell');
 

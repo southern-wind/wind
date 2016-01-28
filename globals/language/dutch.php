@@ -17,6 +17,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/*
+*
+*  DONT EDIT THIS FILE FOR YOUR COMMUNITY PAGE!!
+*  See config/language/LANGUAGE_overwrite.php as per the github WIKI.
+*
+*/
+
 setlocale(LC_ALL, 'en_US.utf8', 'Dutch');
 
 $lang = array(

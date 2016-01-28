@@ -637,9 +637,6 @@ function include_map($element_id) {
 
 	include_map_dependencies();;
 
-	// Include needed javascript
-	include_js_language_tokens();
-	
 	$main->html->head->add_extra(
 			"<script type=\"text/javascript\">
 			$(function() {

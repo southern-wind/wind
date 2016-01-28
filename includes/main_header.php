@@ -35,7 +35,7 @@ class header {
 			return;
 		if (file_exists(ROOT_PATH.'config/mylogo.png')) {
 			$this->tpl['mylogo'] = TRUE;
-			$this->tpl['mylogo_dir'] = ROOT_PATH.'config/';
+			$this->tpl['mylogo_dir'] = surl('/config/');
 		}
 		$this->tpl['link_home'] = make_ref('/');
 		$this->tpl['link_login_form'] = make_ref('/users/loginform');

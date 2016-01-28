@@ -19,7 +19,7 @@ try {
 		$config['db']['database']);
 	
 	$updates = require dirname(__FILE__) . "/updates/all.inc.php";
-	$updater->updateTo(new SchemaVersion(1, 1), $updates);
+	$updater->updateTo(new SchemaVersion(1, 2), $updates);
 } catch (Exception $e){
 	die($e->getMessage() . "\n");
 } 

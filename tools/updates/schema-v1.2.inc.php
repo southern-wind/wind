@@ -35,13 +35,11 @@ $tb->addColumn('date_in', 'datetime', array(
 $tb->addColumn('node_id', 'int unsigned', array(
 		'not_null' => true,
 		'default' => '0',
-		'unique' => true));
+		'unique' => false));
 $tb->addColumn('hostname', 'varchar(50)', array(
-                'not_null' => true,
-                'default' => ''));
+                'not_null' => true));
 $tb->addColumn('cname', 'varchar(50)', array(
-                'not_null' => true,
-                'default' => ''));
+                'not_null' => true));
 $tb->addColumn('info', 'text');
 
 return $update;

@@ -16,9 +16,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *}
 
-{include assign=help file=generic/help.tpl help=nodes_search}
-{include file=generic/page-title.tpl title="`$lang.all_nodes`" right="$help"}
-<div id="map" class="map" style="height: 350px;" > </div>
-<a href="?subpage=map_only" target="_blank" style="text-size:0.8em">Map Only</a>
-{include file=generic/filter.tpl title="`$lang.nodes_search`" content=$form_search_nodes}
-{$table_nodes}
+{*
+*{include assign=help file=generic/help.tpl help=nodes_search}
+*{include file=generic/page-title.tpl title="`$lang.all_nodes`" right="$help"}
+*}
+<div id="map" class="map fullscreen"> </div>
+{*
+*{include file=generic/filter.tpl title="`$lang.nodes_search`" content=$form_search_nodes}
+*{$table_nodes}
+*}

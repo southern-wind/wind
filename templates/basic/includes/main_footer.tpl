@@ -1,7 +1,7 @@
 {*
  * WiND - Wireless Nodes Database
  *
- * Copyright (C) 2005-2014 	by WiND Contributors (see AUTHORS.txt)
+ * Copyright (C) 2005-2016 	by WiND Contributors (see AUTHORS.txt)
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
  * published by the Free Software Foundation, either version 3 of the
@@ -22,6 +22,5 @@
 	<a href="http://www.smarty.net/"><img src="{$img_dir}/logo-smarty.gif" alt="smarty template engine" /></a>
 </div>
 <div class="credits">
-	Powered by: <a target="_blank" href="https://github.com/wind-project/wind"><b>WiND  v{$wind_version}</b></a><br />
-	Copyright 2005-2014 <a target="_blank" href="https://github.com/wind-project/wind/wiki/Team">WiND Contributors</a>
+	Powered by: <a target="_blank" href="https://github.com/southern-wind/wind"><b>Southern-WiND v{$wind_version}</b></a><br />
 </div>

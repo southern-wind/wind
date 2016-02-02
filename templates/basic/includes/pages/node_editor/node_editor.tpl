@@ -114,15 +114,13 @@
 {literal}
 <script type="text/javascript">
 $(document).ready(function(){
-
     $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
-        localStorage.setItem('activeTab', $(e.target).attr('href'));
+        sessionStorage.setItem('activeTab', $(e.target).attr('href'));
     });
-    var activeTab = localStorage.getItem('activeTab');
+    var activeTab = sessionlStorage.getItem('activeTab');
     if(activeTab){
         $('#tabs a[href="' + activeTab + '"]').tab('show');
     }
-
 });
 </script>
 {/literal}

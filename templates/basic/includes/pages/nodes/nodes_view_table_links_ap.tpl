@@ -83,7 +83,8 @@
                                 <td class="{if $data[c].c_status == 'active'}link-up{else}link-down{/if}">
                                 {assign var=t value="links__status-"|cat:$data[c].c_status}{$lang.db.$t}</td>
                                 <td class="table-node-value2">
-                                {$data[c].distance}</td>
+                           	{ * round 2 decimal places * }
+                                {$data[c].distance|number_format:2}</td>
                                 </tr>
                         {/section}
                 {/if}

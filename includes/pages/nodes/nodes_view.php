@@ -192,7 +192,7 @@ class nodes_view {
 		global $db;
 		$table_links = new table(array('TABLE_NAME' => 'table_links_ap'));
 		$table_links->db_data(
-			'nodes.id AS c_node_id, nodes.name AS c_node_name, l1.status AS c_status, l2.date_in AS links__date_in, l2.due_date AS links__due_date, l2.ssid AS links__ssid, l2.type AS links__type, l2.info AS links__info, l2.protocol AS links__protocol, l2.channel AS links__channel, l2.frequency AS links__frequency, l2.equipment AS links__equipment, l2.status AS links__status',
+			'nodes.id AS c_node_id, nodes.name AS c_node_name, l1.status AS c_status, l2.date_in AS links__date_in, l2.due_date AS links__due_date, l2.ssid AS links__ssid, l2.type AS links__type, l2.info AS links__info, l2.protocol AS links__protocol, l2.channel AS links__channel, l2.frequency AS links__frequency, l2.equipment AS links__equipment, l2.status AS links__status, l2.node_id as ap_node_id',
 			'links AS l2
 			LEFT JOIN links AS l1 ON l1.peer_ap_id = l2.id
 			LEFT JOIN nodes ON l1.node_id = nodes.id',
@@ -202,6 +202,7 @@ class nodes_view {
 		foreach( (array) $table_links->data as $key => $value) {
 			if ($key != 0) {
 				$table_links->info['EDIT'][$key] = make_ref('/nodes', array('node' => $table_links->data[$key]['c_node_id']));
+				$table_links->data[$key]['distance'] = $this->calculate_distance($table_links->data[$key]['c_node_id'], $table_links->data[$key]['ap_node_id']);
 			}
 		}
 		return $table_links;

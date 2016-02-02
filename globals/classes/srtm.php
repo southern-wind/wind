@@ -144,40 +144,27 @@ function __construct($data_path='') {
                                      Line:$line, pixel:$pixel, offset:$offset<br />\n";
                 }
 
-                if ($lat_dir == "S") { //South of the equator Read
-                        fseek($file, $offset);
-                        //reverse string - file read (handle, length)
-                        $h1 = srtm::bytes2int(strrev(fread($file, 2)));
-                        if ($h1 == -32768) { //Max depth, make 0
-                                $h1 = 0;
-                        }
-                        fclose ($file);
-                        return $h1;
-                } else { //North of the equator Read (un-modified WiND Version)
-                        fseek($file, $offset);
-                        $h1 = srtm::bytes2int(strrev(fread($file, 2)));
-                        $h2 = srtm::bytes2int(strrev(fread($file, 2)));
-                        fseek($file, $offset-2402);
-                        $h3 = srtm::bytes2int(strrev(fread($file, 2)));
-                        $h4 = srtm::bytes2int(strrev(fread($file, 2)));
-                        fclose($file);
+                fseek($file, $offset);
+                //reverse string - file read (handle, length)
+                $h1 = $h2 = srtm::bytes2int(strrev(fread($file, 2)));
+                fseek($file, $offset-2402);
+                $h3 = $h4 = srtm::bytes2int(strrev(fread($file, 2)));
+                fclose($file);
 
-                        $m = max($h1, $h2, $h3, $h4);
-                        for($i=1;$i<=4;$i++) {
-                                $c = 'h'.$i;
-                                if ($$c == -32768)
-                                        $$c = $m;
-                        }
+                $m = max($h1, $h2, $h3, $h4);
+                for($i=1;$i<=4;$i++) {
+                        $c = 'h'.$i;
+                        if ($$c == -32768)
+                                $$c = $m;
+                }
 
-                        $fx = ($lon - ((integer)($lon * 1200) / 1200)) * 1200;
-                        $fy = ($lat - ((integer)($lat * 1200) / 1200)) * 1200;
+                $fx = ($lon - ((integer)($lon * 1200) / 1200)) * 1200;
+                $fy = ($lat - ((integer)($lat * 1200) / 1200)) * 1200;
 
-                        // normalizing data
-                        $elevation = ($h1 * (1 - $fx) + $h2 * $fx) * (1 - $fy) + ($h3 * (1 - $fx) + $h4 * $fx) * $fy;
-                        if ($round) $elevation = round($elevation);
-                        return $elevation;
-
-                } //End else
+                // normalizing data (smooths landscape from jutting out)
+                $elevation = ($h1 * (1 - $fx) + $h2 * $fx) * (1 - $fy) + ($h3 * (1 - $fx) + $h4 * $fx) * $fy;
+                if ($round) $elevation = round($elevation);
+                return $elevation;
 
         } //End get_elevation
 

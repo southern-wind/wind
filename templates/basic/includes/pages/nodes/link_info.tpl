@@ -31,15 +31,15 @@
 <table class="table">
         <thead>
         <tr>
-        <th class="table-node-key2">Link type</th>
-        <th class="table-node-key2">Created</th>
-        <th class="table-node-key2">Due Date</th>
-        <th class="table-node-key2">SSID</th>
-        <th class="table-node-key2">Protocol</th>
-        <th class="table-node-key2">Channel</th>
-        <th class="table-node-key2">Frequency (Mhz)</th>
-        <th class="table-node-key2">Equipment</th>
-        <th class="table-node-key2">Status</th>
+        <th class="table-node-key2">{$lang.db.links__type}</th>
+        <th class="table-node-key2">{$lang.db.links__date_in}</th>
+        <th class="table-node-key2">{$lang.db.links__due_date}</th>
+        <th class="table-node-key2">{$lang.db.links__ssid}</th>
+        <th class="table-node-key2">{$lang.db.links__protocol}</th>
+        <th class="table-node-key2">{$lang.db.links__channel}</th>
+        <th class="table-node-key2">{$lang.db.links__frequency}</th>
+        <th class="table-node-key2">{$lang.db.links__equipment}</th>
+        <th class="table-node-key2">{$lang.db.links__status}</th>
         </tr>
         </thead>
         <tr>

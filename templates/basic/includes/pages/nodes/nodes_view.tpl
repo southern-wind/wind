@@ -15,6 +15,12 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *}
+ {literal}
+ <script type="text/javascript">{
+ sessionStorage.clear();}
+ </script>
+ {/literal}
+ 
 {if $edit_node}
 	{include assign=ed file="generic/button.tpl" class="btn-sm btn-default" glyph="edit" href=`$edit_node` content=`$lang.edit_node`}
 {/if}

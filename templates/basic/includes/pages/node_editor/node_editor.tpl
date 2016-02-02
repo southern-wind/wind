@@ -30,8 +30,8 @@
 {/if}
 {include file=generic/page-title.tpl title="$t" right="$view_link $delete_link $help"}
 <div class="editor node-editor tabbed">
-	<ul class="nav nav-tabs">
-		<li class="active"><a href="#tab-info" data-toggle="tab">{$lang.node_info}</a></li>
+	<ul class="nav nav-tabs" id="tabs">
+		<li><a href="#tab-info" data-toggle="tab">{$lang.node_info}</a></li>
 		{if $node != 'add'}
 		<li><a href="#tab-links" data-toggle="tab">{$lang.links}</a></li>
 		<li><a href="#tab-network" data-toggle="tab">{$lang.network}</a></li>
@@ -113,8 +113,14 @@
 
 {literal}
 <script type="text/javascript">
-$(function(){
-	$('.tabbed').tab();
+$(document).ready(function(){
+    $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+        sessionStorage.setItem('activeTab', $(e.target).attr('href'));
+    });
+    var activeTab = sessionStorage.getItem('activeTab');
+    if(activeTab){
+        $('#tabs a[href="' + activeTab + '"]').tab('show');}
+    else {$('#tabs a[href="#tab-info"]').tab('show');}
 });
 </script>
 {/literal}

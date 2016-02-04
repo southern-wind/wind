@@ -101,6 +101,16 @@ CREATE TABLE IF NOT EXISTS `ip_addresses` (
   KEY `type` (`type`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+CREATE TABLE `ip_cname` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `date_in` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `node_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `hostname` varchar(50) NOT NULL,
+  `cname` varchar(50) NOT NULL,
+  `info` text,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
 CREATE TABLE IF NOT EXISTS `ip_ranges` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `date_in` datetime NOT NULL default '0000-00-00 00:00:00',

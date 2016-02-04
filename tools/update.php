@@ -18,8 +18,12 @@ try {
 		$config['db']['password'],
 		$config['db']['database']);
 	
-	$updates = require dirname(__FILE__) . "/updates/all.inc.php";
-	$updater->updateTo(new SchemaVersion(1, 1), $updates);
+	$updates = array(
+                include dirname(__FILE__) . "/updates/schema-v1.1.inc.php",
+                include dirname(__FILE__) . "/updates/schema-v1.2.inc.php",
+	        );
+
+	$updater->updateTo(new SchemaVersion(1, 2), $updates);
 } catch (Exception $e){
 	die($e->getMessage() . "\n");
 } 

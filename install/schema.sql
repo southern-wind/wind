@@ -310,3 +310,5 @@ CREATE TABLE IF NOT EXISTS `node_settings_changes` (
   KEY `changemenu` (`changemenu`),
   FULLTEXT KEY `changemade` (`changemade`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+INSERT INTO `update_log` (version_major, version_minor) VALUES(1,2);

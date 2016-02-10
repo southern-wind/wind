@@ -24,4 +24,8 @@ $update = new DBUpdateDescriptor(new SchemaVersion(1,2), new SchemaVersion(1,3))
 $update->newColumn('ip_addresses', 'zone_type', 'zone_type', 'enum('forward', 'reverse', 'fwdNrev')', array(
                 'default' => 'fwdNrev'));
 
+$update->modifyColumn('ip_cname', 'node_id', 'node_id', 'int unsigned', array(
+		'key' => true,
+		'not_null' => true,
+		'default' => '0'));
 return $update;

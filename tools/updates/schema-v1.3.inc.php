@@ -21,9 +21,11 @@ $update = new DBUpdateDescriptor(new SchemaVersion(1,2), new SchemaVersion(1,3))
  *         ip_addresses database changes          */
 
 // column for zone_types
-$update->newColumn('ip_addresses', 'zone_type', 'zone_type', 'enum('forward', 'reverse', 'fwdNrev')', array(
-                'default' => 'fwdNrev'));
+// Note as default will be a text value, its purposely double quoted.
+$update->newColumn('ip_addresses', 'zone_type', "enum('forward', 'reverse', 'fwdNrev')", array(
+                'default' => "'fwdNrev'"));
 
+// add index key on node_id
 $update->modifyColumn('ip_cname', 'node_id', 'node_id', 'int unsigned', array(
 		'key' => true,
 		'not_null' => true,

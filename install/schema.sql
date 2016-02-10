@@ -1,4 +1,3 @@
-//Schema V1.3
 CREATE TABLE IF NOT EXISTS `update_log` (
   `version_major` int unsigned NOT NULL,
   `version_minor` int unsigned NOT NULL,

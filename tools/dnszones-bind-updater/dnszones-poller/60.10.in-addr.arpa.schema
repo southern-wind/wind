@@ -1,0 +1,13 @@
+$ORIGIN 60.10.in-addr.arpa.
+$TTL 5	; 5 seconds
+@		IN SOA	ns0.anycast.ns.forward-tld. hostmaster.example.org. (
+				##SERIAL## ; serial
+				43200      ; refresh (12 hours)
+				900        ; retry (15 minutes)
+				604800     ; expire (1 week)
+				5          ; minimum (5 seconds)
+				)
+
+##NAMESERVERS##
+
+##ZONES##

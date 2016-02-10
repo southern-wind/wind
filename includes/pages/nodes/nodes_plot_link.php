@@ -90,7 +90,7 @@ class nodes_plot_link {
 					$this->tpl['frequency'] = (integer)$apFreq;
 				}
                         }
-			if ($this->tpl['frequency'] <= 0) $this->tpl['frequency'] = 2450;
+			if ($this->tpl['frequency'] <= 0) $this->tpl['frequency'] = 5500;
 			$frequency = $this->tpl['frequency'] * 1000000;
 			$c = 299792.458; // light speed in km
 			$this->tpl['fsl'] = 20 * log10(4 * pi() * $this->tpl['distance'] * ($frequency / $c));

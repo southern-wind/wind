@@ -37,58 +37,10 @@
 	{if $data[row].date_in != ''}
 	{assign var=close2 value="</table></td></tr>"}
 	<tr><td>
-	<table class="table-form">
-	<tr>
-	{foreach key=key item=itm from=$data.0}
-	{assign var="fullkey" value=$data.0.$key}
-	{if $extra_data.HIDE.$fullkey != 'YES'}
-	{if $lang.db.$itm != ''}
-		{assign var="cell" value="`$lang.db.$itm`"}
-		{assign var="cellclass" value="table-node-key2"}
-	{elseif $extra_data.TRANSLATE.$fullkey == 'YES'}
-		{assign var="cellclass" value="table-node-value2"}
-		{assign var="lang_cell" value=$fullkey|cat:"-"|cat:$itm}
-		{assign var="cell" value=$lang.db.$lang_cell}
-		{assign var="cellclass" value="table-node-value2"}
-	{else}
-		{assign var="cellclass" value="table-node-value2"}
-		{assign var="cell" value=$itm}
-	{/if}
-	
-	<td class="{$cellclass}">{$cell|escape}</td>
-	{/if}
-	{/foreach}
-	</tr>
-	{/if}
-{/if}
-	{if $data[row].date_in != ''}
-	<tr>
-		{foreach key=key item=itm from=$data[row]}
-		{assign var="fullkey" value=$data.0.$key}
-		{if $extra_data.HIDE.$fullkey != 'YES'}
-		{if $smarty.section.row.index == 0 && $lang.db.$itm != ''}
-			{assign var="cell" value="`$lang.db.$itm`"}
-			{assign var="cellclass" value="table-node-key2"}
-		{elseif $smarty.section.row.index != 0 && $key|truncate:5:"":true == 'date_'}
-			{assign var="cell" value=$itm|date_format:"%x"}
-			{assign var="cellclass" value="table-node-value2"}
-		{elseif $extra_data.TRANSLATE.$fullkey == 'YES'}
-			{assign var="cellclass" value="table-node-value2"}
-			{assign var="lang_cell" value=$fullkey|cat:"-"|cat:$itm}
-			{assign var="cell" value=$lang.db.$lang_cell}
-			{assign var="cellclass" value="table-node-value2"}
-		{else}
-			{assign var="cellclass" value="table-node-value2"}
-			{assign var="cell" value=$itm}
-		{/if}
-		
-		<td class="{$cellclass}">{$cell|escape}</td>
-		{/if}
-		{/foreach}
-	</tr>
-	{/if}
+		{include file="constructors/table2.tpl"}
+                {/if}
+        </tr>
+        {/if}
 {/section}
-{$close2}{$close1}
-{assign var=close1 value=""}
-{assign var=close2 value=""}
+{$close2}
 </table>

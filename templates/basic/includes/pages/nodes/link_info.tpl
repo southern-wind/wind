@@ -23,56 +23,46 @@
 </tr>
 <tr>
 <td class="table-d1-text1">
-		<table border="0" cellpadding="0" cellspacing="6" class="table-form">
-		<tr class="table-form-row1">
-		<td class="table-node-link-info"><img src="{$img_dir}/node.gif" width="32" height="32" alt="{$lang.db.peer}" /></td>
-		<td class="table-node-link-info" width="33%">
+                <table border="0" cellpadding="0" cellspacing="6" class="table">
+                <tr class="table-form-row1">
+                <td class="table-node-link-info"><img src="{$img_dir}/node.gif" width="32" height="32" alt="{$lang.db.peer}" /></td>
+                <td class="table-node-link-info">
 
-<table class="table-form">
+<table class="table">
+        <thead>
+        <tr>
+        <th class="table-node-key2">{$lang.db.links__type}</th>
+        <th class="table-node-key2">{$lang.db.links__date_in}</th>
+        <th class="table-node-key2">{$lang.db.links__due_date}</th>
+        <th class="table-node-key2">{$lang.db.links__ssid}</th>
+        <th class="table-node-key2">{$lang.db.links__protocol}</th>
+        <th class="table-node-key2">{$lang.db.links__channel}</th>
+        <th class="table-node-key2">{$lang.db.links__frequency}</th>
+        <th class="table-node-key2">{$lang.db.links__equipment}</th>
+        <th class="table-node-key2">{$lang.db.links__status}</th>
+        </tr>
+        </thead>
+        <tr>
 <tr>
-	<td class="table-node-key2">{$lang.db.links__type}</td>
-	<td class="table-node-value2">{assign var=t value="links__type-"|cat:$data[rowl].links__type}{$lang.db.$t}</td>
-</tr>
-<tr>
-	<td class="table-node-key2">{$lang.db.links__status}</td>
-	<td class="{if $data[rowl].links__status == 'active'}link-up{else}link-down{/if}">{assign var=t value="links__status-"|cat:$data[rowl].links__status}{$lang.db.$t}</td>
-</tr>
-<tr>
-	<td class="table-node-key2">{$lang.db.links__date_in}</td>
-	<td class="table-node-value2">{$data[rowl].links__date_in|date_format:"%x"}</td>
-</tr>
-<tr>
-        <td class="table-node-key2">{$lang.db.links__due_date}</td>
+        <td class="table-node-value2">{assign var=t value="links__type-"|cat:$data[rowl].links__type}{$lang.db.$t}</td>
+        <td class="table-node-value2">{$data[rowl].links__date_in|date_format:"%x"}</td>
         <td class="table-node-value2">{$data[rowl].links__due_date|date_format:"%x"}</td>
-</tr>
-<tr>
-	<td class="table-node-key2">{$lang.db.links__protocol}</td>
-	<td class="table-node-value2">{$data[rowl].links__protocol|escape}</td>
-</tr>
-<tr>
-	<td class="table-node-key2">{$lang.db.links__ssid}</td>
-	<td class="table-node-value2">{$data[rowl].links__ssid|escape}</td>
-</tr>
-<tr>
-	<td class="table-node-key2">{$lang.db.links__channel}</td>
-	<td class="table-node-value2">{$data[rowl].links__channel|escape}</td>
-</tr>
-<tr>
-        <td class="table-node-key2">{$lang.db.links__frequency}</td>
+        <td class="table-node-value2">{$data[rowl].links__ssid|escape}</td>
+        <td class="table-node-value2">{$data[rowl].links__protocol|escape}</td>
+        <td class="table-node-value2">{$data[rowl].links__channel|escape}</td>
         <td class="table-node-value2">{$data[rowl].links__frequency|escape}</td>
-</tr>
-<tr>
-	<td class="table-node-key2">{$lang.db.links__equipment}</td>
-	<td class="table-node-value2">{$data[rowl].links__equipment|escape|nl2br}</td>
+        <td class="table-node-value2">{$data[rowl].links__equipment|escape|nl2br}</td>
+        <td class="{if $data[rowl].links__status == 'active'}link-up{else}link-down{/if}">{assign var=t value="links__status-"|cat:$data[rowl].links__status}{$lang.db.$t}</td>
 </tr>
 </table>
-		</td>
-		<td class="table-node-link-info" width="33%">{include file=generic/plot.tpl}</td>
-		<td class="table-node-link-info" width="33%" height="100%">
-		{include file="generic/section-level5.tpl" title="`$lang.db.links__info`" content="`$data[rowl].links__info`"|escape|nl2br}
-		</td>
-		</tr>
-		</table>
+
+
+                <div>
+                {include file="generic/section-level5.tpl" title="`$lang.db.links__info`" content="`$data[rowl].links__info`"|escape|nl2br}
+                {include file="generic/plot.tpl"}
+                </div>
+                </td></tr>
+                </table>
 </td>
 </tr>
 </table>

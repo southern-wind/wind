@@ -17,6 +17,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/*****
+*
+*  DONT EDIT THIS FILE FOR YOUR COMMUNITY PAGE!!
+*  See config/language/LANGUAGE_overwrite.php as per the github WIKI.
+*
+*****/
+
 /* el_GR.utf8 for GNU/Linux - ell for Windows */
 setlocale(LC_ALL, 'el_GR.utf8', 'ell');
 
@@ -708,7 +715,7 @@ $lang = array(
                 'node_editor_cname_edit' => array(
                         'title' => 'Επεξεργασία CNAME',
                         'body' => 'Σε αυτή τη σελίδα μπορείτε να προσθέσετε ή να επεξεργαστείτε μια διεύθυνση CNAME για το όνομα του μηχανήματος στον κόμβο σας.'
-
+		),
 		'node_editor_services_add' => array(
 			'title' => 'Προσθήκη υπηρεσίας',
 			'body' => 'Στη σελίδα αυτή μπορείτε να προσθέσετε μία υπηρεσία του κόμβου σας. Το πεδίο Διεύθυνση IP περιέχει όλες τις διευθύνσεις που έχετε δηλώσει και πρέπει να καθορίζει την IP στην οποία τρέχει (ακούει) η υπηρεσία. Το πεδίο URL, πρέπει να περιέχει το link για την υπηρεσία ή το link για κάποια σελίδα που αναφέρεται στην υπηρεσία. Τέλος τα πεδία Πρωτόκολλο και Πόρτα, πρέπει να αναφέρονται στο πρωτόκολλο που χρησιμοποιεί η υπηρεσία (π.χ. tcp, udp) και στην πόρτα που ακούει.'

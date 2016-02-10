@@ -1,0 +1,35 @@
+WiND ANYCAST ZONE CREATION TOOL
+# 2016-01-27 - Initial Release, as used by WAFN - JammiN
+
+Once enabled via CRON, this tool will pull DNS records from WiND
+and then create a valid zone file for BIND anycast servers
+
+The created Zone file is compared to a live zone file. If newer it will
+ - push the updates to the configured anycast servers.
+ - restart bind on each server to read new DNS Zone info.
+
+
+To enable this tool, do as following.
+
+REQUIRES: named-checkzone (debian / ubuntu - apt-get install bind9utils)
+
+Configure the following files as needed:
+"zone_global_settings.sh"
+"cron/wind" 
+
+For each TLD Zone listed in the $ZONES array in "zone_global_settings.sh" do the following
+  For a forward zone:
+	In folder "dnszones-poller" copy the forward-example.conf and forward-example.schema
+	Modify the copied file to suit your Zone and DB.
+  For a Reverse zone:
+	In folder "dnszones-poller" copy the reverse-example.conf and reverse-example.schema
+	Modify the copied file to suit your Zone and DB
+
+Check write permissions on log folder for the cron user.
+Check +x permission on zone_update
+
+Run a test (as the cron user) to make sure everything works.
+ "wind/tools/dnszones-bind-updater/zone_update"
+
+Once satisfied everything is working, enable it.
+Copy "cron/wind" to /etc/cron.d/

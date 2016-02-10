@@ -1,0 +1,50 @@
+#!/bin/bash
+# zone_update bash script Version 1
+# Copyleft 2005 - Ernest0x (ernest0x at yahoo dot gr)
+# Copyleft 2016 - JammiN
+
+# Discription
+# -----------
+# If it is needed, this script  updates a DNS zone file from another 
+# php-generated zone file. 
+# It is meant to be used by the Southern-WiND project (https://github.com/southern-wind/wind).
+
+
+# Notes
+# -----
+# - Both your system's zone file and the php-generated zone file must include a 
+#   line that contains a "; serial" comment string. This line gives its place to 
+#   a new serial line, constructed by this script.
+
+
+####
+# Nothing to configure here. See "./zone_global_settings.sh"
+#
+# If zone updates aren't getting pushed, then check all the server indexs in "./zone_global_settings.sh"
+
+
+###IMPORT GLOBAL VARIABLES
+. $(dirname $0)/zone_global_settings.sh
+
+DEBUG="false";
+
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11
+LOG=$LOCATION/log/anycast_update.log
+ZONES_ROOT="$LOCATION/zones/";
+
+# The php script to generate the new zone file. 
+PHP_SCRIPT="$LOCATION/dnszones-poller/dnszones-poller.php";
+
+## Check each zone for updates.
+for i in "${ZONES[@]}"
+do
+
+# The current zone file (just the filename, not the fullpath).
+# This is given as an argument when calling the script.
+CUR_ZONE=$i
+
+echo "$(date) Starting zone update for $CUR_ZONE ..." >> $LOG
+
+$(createNewZone);
+
+done; #end Loop

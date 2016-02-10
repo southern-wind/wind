@@ -153,7 +153,7 @@ NetworkMap.prototype._constructMap = function() {
         if (typeof(google) != 'undefined')
                 this._olLayers['googleT'] = new OpenLayers.Layer.Google("Google Terrain", {type: google.maps.MapTypeId.TERRAIN, visibility: false});
 	if (typeof(google) != 'undefined') 
-		this._olLayers['google'] = new OpenLayers.Layer.Google("Google Satelite", {type: google.maps.MapTypeId.SATELLITE, visibility: false});
+		this._olLayers['google'] = new OpenLayers.Layer.Google("Google Satellite", {type: google.maps.MapTypeId.SATELLITE, visibility: false});
 	
 	var olLayers = [];
 	$.each(this._olLayers, function(name, layer){
@@ -322,8 +322,8 @@ NetworkMap.prototype._downloadTopology = function(focus_selected) {
 			// GeoJSON inherits all properties + extra
 			var properties = jQuery.extend({}, link);
 			properties['color'] = (link['status'] == 'active')
-				?'#0099FF'
-				:'#ff0000';
+				?'#0099FF' //blue link color
+				:'#FF8C95'; //red link color
 			
 			return {
 				'type' : "Feature",

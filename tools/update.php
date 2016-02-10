@@ -1,5 +1,15 @@
 #!/usr/bin/env php
 <?php 
+/*
+
+Updating schema requires edits in the following files:
+1. Update schema.sql for change. This should reflect the latest version of the schema.  The last line should log the updated version (say x.y).
+2. Create a module in /updates/schema-vx.y.inc.php containing code to update the schema from the previous version.
+3. Edit this file (update.php) to include reference to that file in $updates array
+3. Update the version in updateTo below to reflect x,y.
+
+*/
+
 
 if (!php_sapi_name() == 'cli')
 	die('This is a command line only script.');
@@ -18,8 +28,14 @@ try {
 		$config['db']['password'],
 		$config['db']['database']);
 	
-	$updates = require dirname(__FILE__) . "/updates/all.inc.php";
-	$updater->updateTo(new SchemaVersion(1, 1), $updates);
+	$updates = array(
+                include dirname(__FILE__) . "/updates/schema-v1.1.inc.php",
+                include dirname(__FILE__) . "/updates/schema-v1.2.inc.php",
+	        //Reverse Zones
+        	include dirname(__FILE__) . "/updates/schema-v1.3.inc.php"
+	        );
+
+	$updater->updateTo(new SchemaVersion(1, 3), $updates);
 } catch (Exception $e){
 	die($e->getMessage() . "\n");
 } 

@@ -1,4 +1,3 @@
-
 CREATE TABLE IF NOT EXISTS `update_log` (
   `version_major` int unsigned NOT NULL,
   `version_minor` int unsigned NOT NULL,
@@ -10,8 +9,8 @@ CREATE TABLE IF NOT EXISTS `areas` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `region_id` int(10) unsigned NOT NULL default '0',
   `name` varchar(40) NOT NULL default '',
-  `ip_start` int(10) NOT NULL default '0',
-  `ip_end` int(10) NOT NULL default '0',
+  `ip_start` int(10) unsigned NOT NULL default '0',
+  `ip_end` int(10) unsigned NOT NULL default '0',
   `info` text,
   `v6net` varbinary(16) default '0',
   `v6prefix` smallint(6) default '0',
@@ -50,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `dns_nameservers` (
   `date_in` datetime NOT NULL default '0000-00-00 00:00:00',
   `node_id` int(10) unsigned NOT NULL default '0',
   `name` enum('ns0','ns1','ns2','ns3') NOT NULL default 'ns0',
-  `ip` int(10) NOT NULL default '0',
+  `ip` int(10) unsigned NOT NULL default '0',
   `status` enum('waiting','active','pending','rejected','invalid') NOT NULL default 'waiting',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `unique_keys` (`name`,`node_id`),
@@ -89,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `ip_addresses` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `date_in` datetime NOT NULL default '0000-00-00 00:00:00',
   `hostname` varchar(50) NOT NULL default '',
-  `ip` int(10) NOT NULL default '0',
+  `ip` int(10) unsigned NOT NULL default '0',
   `mac` varchar(17) default NULL,
   `node_id` int(10) unsigned NOT NULL default '0',
   `type` enum('router','server','pc','wireless-bridge','voip','camera','other') NOT NULL default 'pc',
@@ -102,12 +101,22 @@ CREATE TABLE IF NOT EXISTS `ip_addresses` (
   KEY `type` (`type`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+CREATE TABLE `ip_cname` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `date_in` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `node_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `hostname` varchar(50) NOT NULL,
+  `cname` varchar(50) NOT NULL,
+  `info` text,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
 CREATE TABLE IF NOT EXISTS `ip_ranges` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `date_in` datetime NOT NULL default '0000-00-00 00:00:00',
   `node_id` int(10) unsigned NOT NULL default '0',
-  `ip_start` int(10) NOT NULL default '0',
-  `ip_end` int(10) NOT NULL default '0',
+  `ip_start` int(10) unsigned NOT NULL default '0',
+  `ip_end` int(10) unsigned NOT NULL default '0',
   `status` enum('waiting','active','pending','rejected','invalid') NOT NULL default 'waiting',
   `info` text,
   `delete_req` enum('Y','N') NOT NULL default 'N',
@@ -218,8 +227,8 @@ CREATE TABLE IF NOT EXISTS `photos` (
 CREATE TABLE IF NOT EXISTS `regions` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `name` varchar(40) NOT NULL default '',
-  `ip_start` int(10) NOT NULL default '0',
-  `ip_end` int(10) NOT NULL default '0',
+  `ip_start` int(10) unsigned NOT NULL default '0',
+  `ip_end` int(10) unsigned NOT NULL default '0',
   `v6net` varbinary(16) default '0',
   `v6prefix` smallint(6) default '0',
   `info` text,
@@ -252,8 +261,8 @@ CREATE TABLE IF NOT EXISTS `subnets` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `date_in` datetime NOT NULL default '0000-00-00 00:00:00',
   `node_id` int(10) unsigned default NULL,
-  `ip_start` int(10) NOT NULL default '0',
-  `ip_end` int(10) NOT NULL default '0',
+  `ip_start` int(10) unsigned NOT NULL default '0',
+  `ip_end` int(10) unsigned NOT NULL default '0',
   `type` enum('local','link','client') NOT NULL default 'local',
   `link_id` int(10) unsigned default NULL,
   `client_node_id` int(10) unsigned default NULL,
@@ -310,3 +319,5 @@ CREATE TABLE IF NOT EXISTS `node_settings_changes` (
   KEY `changemenu` (`changemenu`),
   FULLTEXT KEY `changemade` (`changemade`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+INSERT INTO `update_log` (version_major, version_minor) VALUES(1,2);

@@ -192,5 +192,6 @@ class DBUpdater {
 		foreach($updates_to_be_applied as $update) {
 			$this->applyUpdate($update);
 		}
+		printf "Database schema updated!\n";
 	}
 };

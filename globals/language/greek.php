@@ -377,6 +377,12 @@ $lang = array(
 		'ip_addresses__always_on-Y' => 'ΝΑΙ',
 		'ip_addresses__always_on-N' => 'ΟΧΙ',
 		'ip_addresses__info' => 'Πληροφορίες',
+		//Database __ Field - enums
+                'ip_addresses__zone_type' => 'DNS ζώνης Τύπος',
+                'ip_addresses__zone_type-forward' => 'Προς τα εμπρός',
+                'ip_addresses__zone_type-reverse' => 'Αντίστροφο',
+                'ip_addresses__zone_type-fwdNrev' => 'Εμπρός και όπισθεν',
+
 
                 'ip_cname__date_in' => 'Προστέθηκε',
                 'ip_cname__hostname' => 'Hostname',

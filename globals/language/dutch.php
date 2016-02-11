@@ -372,6 +372,12 @@ $lang = array(
 		'ip_addresses__always_on-Y' => 'Ja',
 		'ip_addresses__always_on-N' => 'Nee',
 		'ip_addresses__info' => 'Informatie',
+		//Database __ Field - enums
+                'ip_addresses__zone_type' => 'DNS Zone Type',
+                'ip_addresses__zone_type-forward' => 'Vooruit',
+                'ip_addresses__zone_type-reverse' => 'Omgekeerde',
+                'ip_addresses__zone_type-fwdNrev' => 'Vooruit en achteruit',
+
 
                 'ip_cname__date_in' => 'Toegevoegd',
                 'ip_cname__hostname' => 'Hostname',

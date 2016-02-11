@@ -375,6 +375,11 @@ $lang = array(
 		'ip_addresses__always_on-Y' => 'Yes',
 		'ip_addresses__always_on-N' => 'No',
 		'ip_addresses__info' => 'Info',
+		//Database __ Field - enums
+		'ip_addresses__zone_type' => 'DNS Zone Type',
+		'ip_addresses__zone_type-forward' => 'Forward',
+		'ip_addresses__zone_type-reverse' => 'Reverse',
+		'ip_addresses__zone_type-fwdNrev' => 'Forward &amp; Reverse',
 
                 'ip_cname__date_in' => 'Added',
                 'ip_cname__hostname' => 'Hostname',

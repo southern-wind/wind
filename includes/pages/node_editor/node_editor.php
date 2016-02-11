@@ -286,6 +286,35 @@ class node_editor {
 		return $table_ipaddr;
 	}
 
+        function table_ipaddr_fwdNrev() {
+                                global $construct, $db;
+		//html table name
+                $table_ipaddr_fwdNrev = new table(array('TABLE_NAME' => 'table_ipaddr_fwdNrev', 'FORM_NAME' => 'table_ipaddr_fwdNrev'));
+                $table_ipaddr_fwdNrev->db_data(
+                        'ip_addresses.id, ip_addresses.hostname, ip_addresses.ip, ip_addresses.mac, ip_addresses.type, ip_addresses.always_on',
+                        'ip_addresses',
+                        'ip_addresses.node_id = "'.intval(get('node')).'" and zone_type = "fwdNrev"',
+                        "",
+                        "ip_addresses.ip ASC");
+                foreach( (array) $table_ipaddr_fwdNrev->data as $key => $value) {
+                        if ($key != 0) {
+                                $table_ipaddr_fwdNrev->data[$key]['ip'] = long2ip($table_ipaddr_fwdNrev->data[$key]['ip']);
+                        }
+                }
+                $table_ipaddr_fwdNrev->db_data_multichoice('ip_addresses', 'id');
+                for($i=1;$i<count($table_ipaddr_fwdNrev->data);$i++) {
+                        if (isset($table_ipaddr_fwdNrev->data[$i])) {
+                                $table_ipaddr_fwdNrev->info['EDIT'][$i] = make_ref('/node_editor/ipaddr_fwdNrev',
+                                        array('node' => intval(get('node')), "ipaddr_fwdNrev" => $table_ipaddr_fwdNrev->data[$i]['id']));
+                        }
+                }
+                $table_ipaddr_fwdNrev->info['EDIT_COLUMN'] = 'hostname';
+                $table_ipaddr_fwdNrev->info['MULTICHOICE_LABEL'] = 'delete';
+                $table_ipaddr_fwdNrev->db_data_remove('id');
+                $table_ipaddr_fwdNrev->db_data_translate('ip_addresses__type', 'ip_addresses__always_on');
+                return $table_ipaddr_fwdNrev;
+        }
+
 	function table_ipaddr_rev() {
 		                global $construct, $db;
                 $table_ipaddr_rev = new table(array('TABLE_NAME' => 'table_ipaddr_rev', 'FORM_NAME' => 'table_ipaddr_rev'));
@@ -477,6 +506,7 @@ class node_editor {
 				}
 				$this->tpl['table_subnets'] = $construct->table($this->table_subnets(), __FILE__);
 				$this->tpl['table_ipaddr'] = $construct->table($this->table_ipaddr(), __FILE__);
+				$this->tpl['table_ipaddr_fwdNrev'] = $construct->table($this->table_ipaddr_fwdNrev(), __FILE__);
 				$this->tpl['table_ipaddr_rev'] = $construct->table($this->table_ipaddr_rev(), __FILE__);
 				$this->tpl['table_cname'] = $construct->table($this->table_cname(), __FILE__);
 				$this->tpl['table_services'] = $construct->table($this->table_services(), __FILE__);
@@ -493,6 +523,7 @@ class node_editor {
 				$this->tpl['link_link_add'] = make_ref('/node_editor/link', array('node' => get('node'), 'link' => 'add'));
 				$this->tpl['link_subnet_add'] = make_ref('/node_editor/subnet', array('node' => get('node'), 'subnet' => 'add'));
 				$this->tpl['link_ipaddr_add'] = make_ref('node_editor/ipaddr', array('node' => get('node'), 'ipaddr' => 'add'));
+				$this->tpl['link_ipaddr_fwdNrev_add'] = make_ref('node_editor/ipaddr_fwdNrev', array('node' => get('node'), 'ipaddr_fwdNrev' => 'add'));
 				$this->tpl['link_ipaddr_rev_add'] = make_ref('node_editor/ipaddr_rev', array('node' => get('node'), 'ipaddr_rev' => 'add'));
 				$this->tpl['link_cname_add'] = make_ref('node_editor/cname', array('node' => get('node'), 'cname' => 'add'));
 				$this->tpl['link_services_add'] = make_ref('/node_editor/services', array('node' => get('node'), 'service' => 'add'));
@@ -675,6 +706,19 @@ class node_editor {
 		}
 	}
 	
+	function output_onpost_table_ipaddr_fwdNrev() {
+                global $db, $main;
+                $ret = TRUE;
+                foreach( (array) $_POST['id'] as $key => $value) {
+                        $ret = $ret && $db->del("ip_addresses", '', "id = '".intval($value)."' AND node_id = ".intval(get('node')));
+                }
+                if ($ret) {
+                        $main->message->set_fromlang('info', 'delete_success', self_ref());
+                } else {
+                        $main->message->set_fromlang('error', 'generic');
+                }
+        }
+
 	function output_onpost_table_ipaddr_rev() {
                 global $db, $main;
                 $ret = TRUE;
@@ -692,7 +736,7 @@ class node_editor {
                 global $db, $main;
                 $ret = TRUE;
                 foreach( (array) $_POST['id'] as $key => $value) {
-                        $ret = $ret && $db->del("ip_addresses", '', "id = '".intval($value)."' AND node_id = ".intval(get('node')));
+                        $ret = $ret && $db->del("ip_cname", '', "id = '".intval($value)."' AND node_id = ".intval(get('node')));
                 }
                 if ($ret) {
                         $main->message->set_fromlang('info', 'delete_success', self_ref());

@@ -23,6 +23,47 @@ If any check fails, then make the folder writable by web server process and retr
 <?php
 $step_result = true;
 
+$root_photos= $_SERVER['DOCUMENT_ROOT']."/files/photos";
+$root_srtm= $_SERVER['DOCUMENT_ROOT']."/files/srtm";
+$root_temp= $_SERVER['DOCUMENT_ROOT']."/templates/_compiled/basic";
+$root_config= $_SERVER['DOCUMENT_ROOT']."/config";
+
+$tags_photos = explode('/' , $root_photos);
+$mkDir = "";
+foreach($tags_photos as $folder) {          
+        $mkDir = $mkDir . $folder ."/";        
+        if(!is_dir($mkDir)) {             
+          mkdir($mkDir, 0777);            
+        }
+    }
+
+$tags_srtm = explode('/' , $root_srtm);
+$mkDir = "";
+foreach($tags_srtm as $folder) {          
+        $mkDir = $mkDir . $folder ."/";   
+        if(!is_dir($mkDir)) {             
+          mkdir($mkDir, 0777);            
+        }
+    }
+
+$tags_temp = explode('/' , $root_temp);
+$mkDir = "";
+foreach($tags_temp as $folder) {          
+        $mkDir = $mkDir . $folder ."/";            
+        if(!is_dir($mkDir)) {             
+          mkdir($mkDir, 0777);            
+        }
+    }
+
+$tags_config = explode('/' , $root_config);
+$mkDir = "";
+foreach($tags_config as $folder) {          
+        $mkDir = $mkDir . $folder ."/";         
+        if(!is_dir($mkDir)) {             
+          mkdir($mkDir, 0777);            
+        }
+    }
+    
 $writable_dir = array(
 	'/files/photos',
 	'/files/srtm',

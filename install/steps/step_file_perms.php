@@ -23,6 +23,18 @@ If any check fails, then make the folder writable by web server process and retr
 <?php
 $step_result = true;
 
+$root= $_SERVER['DOCUMENT_ROOT'];
+
+$toCreate = array(
+$root.'/files/photos',
+$root.'/files/srtm',
+$root.'/templates/_compiled/basic',
+$root.'/config');
+
+$permissions = 0777;
+foreach ($toCreate as $dir){mkdir($dir, $permissions, TRUE);}
+
+
 $writable_dir = array(
 	'/files/photos',
 	'/files/srtm',

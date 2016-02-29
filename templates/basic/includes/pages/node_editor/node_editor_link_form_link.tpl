@@ -116,7 +116,12 @@ function type_changed() {
 		<select class="form-control" name="{$data[0].fullField}" onchange="type_changed()">
 			{if $data[0].Null == 'YES'}<option value=""></option>{/if}
 			{section loop=$data[0].Type_Enums name=e}
-			<option value="{$data[0].Type_Enums[e].value|escape}"{if $data[0].Type_Enums[e].value == $data[0].value} selected="selected"{/if}>{include file=constructors/form_enum.tpl fullField=$data.0.fullField value=$data[0].Type_Enums[e].output}</option>
+			<option value="{$data[0].Type_Enums[e].value|escape}"
+			{* Select if stored value *}
+			{if $data[0].Type_Enums[e].value == $data[0].value} selected="selected"
+			{* else Select table default value *}
+			{elseif $data[0].value == "" && $data[0].Type_Enums[e].value == $data[0].Default} selected="selected"
+			{/if}>{include file=constructors/form_enum.tpl fullField=$data.0.fullField value=$data[0].Type_Enums[e].output}</option>
 			{/section}
 		</select>
 	</div>
@@ -162,7 +167,12 @@ function type_changed() {
 			<select class="form-control" name="{$data[6].fullField}">
 				{if $data[6].Null == 'YES'}<option value=""></option>{/if}
 				{section loop=$data[6].Type_Enums name=e}
-					<option value="{$data[6].Type_Enums[e].value|escape}"{if $data[6].Type_Enums[e].value == $data[6].value} selected="selected"{/if}>{include file=constructors/form_enum.tpl fullField=$data.6.fullField value=$data[6].Type_Enums[e].output}</option>
+                      			<option value="{$data[6].Type_Enums[e].value|escape}"
+                        		{* Select if stored value *}
+                        		{if $data[6].Type_Enums[e].value == $data[6].value} selected="selected"
+                        		{* else Select table default value *}
+                        		{elseif $data[6].value == "" && $data[6].Type_Enums[e].value == $data[6].Default} selected="selected"
+                        		{/if}>{include file=constructors/form_enum.tpl fullField=$data.0.fullField value=$data[6].Type_Enums[e].output}</option>
 				{/section}
 			</select>
 	</div>

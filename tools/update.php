@@ -31,9 +31,11 @@ try {
 	$updates = array(
                 include dirname(__FILE__) . "/updates/schema-v1.1.inc.php",
                 include dirname(__FILE__) . "/updates/schema-v1.2.inc.php",
+	        //Reverse Zones
+        	include dirname(__FILE__) . "/updates/schema-v1.3.inc.php"
 	        );
 
-	$updater->updateTo(new SchemaVersion(1, 2), $updates);
+	$updater->updateTo(new SchemaVersion(1, 3), $updates);
 } catch (Exception $e){
 	die($e->getMessage() . "\n");
 } 

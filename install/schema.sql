@@ -94,6 +94,7 @@ CREATE TABLE IF NOT EXISTS `ip_addresses` (
   `type` enum('router','server','pc','wireless-bridge','voip','camera','other') NOT NULL default 'pc',
   `always_on` enum('Y','N') NOT NULL default 'N',
   `info` text,
+  `zone_type` enum('forward', 'reverse', 'fwdNrev') NOT NULL default 'fwdNrev',
   PRIMARY KEY  (`id`),
   KEY `ip` (`ip`),
   KEY `node_id` (`node_id`),
@@ -108,7 +109,8 @@ CREATE TABLE `ip_cname` (
   `hostname` varchar(50) NOT NULL,
   `cname` varchar(50) NOT NULL,
   `info` text,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `node_id` (`node_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ip_ranges` (

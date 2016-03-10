@@ -56,23 +56,23 @@
 			
 		{include file=generic/section-level3.tpl title="`$lang.ip_ranges`" buttons="`$btn_request`" content=$table_ip_ranges}
 		
-		{include assign="btn_add" file="generic/button.tpl" href=$link_subnet_add content="`$lang.subnet_add`"
+		{include assign="btn_add" file="generic/button.tpl" href=$link_subnet_add content="`$lang.add`"
 			class="btn-success btn-sm" glyph="plus-sign"}
 		{include file=generic/section-level3.tpl title="`$lang.subnets`" buttons="`$btn_add`" content=$table_subnets}
 		
-		{include assign="btn_add" file="generic/button.tpl" href=$link_ipaddr_fwdNrev_add content="`$lang.ip_address_fwdNrev_add`"
+		{include assign="btn_add" file="generic/button.tpl" href=$link_ipaddr_fwdNrev_add content="`$lang.add`"
 			class="btn-success btn-sm" glyph="plus-sign"}
 		{include file=generic/section-level3.tpl title="`$lang.ip_addresses_fwdNrev`" buttons="`$btn_add`" content=$table_ipaddr_fwdNrev}
 
-		{include assign="btn_add" file="generic/button.tpl" href=$link_ipaddr_add content="`$lang.ip_address_add`"
+		{include assign="btn_add" file="generic/button.tpl" href=$link_ipaddr_add content="`$lang.add`"
 			class="btn-success btn-sm" glyph="plus-sign"}
 		{include file=generic/section-level3.tpl title="`$lang.ip_addresses`" buttons="`$btn_add`" content=$table_ipaddr}
 		
-		{include assign="btn_add" file="generic/button.tpl" href=$link_ipaddr_rev_add content="`$lang.ip_address_rev_add`"
+		{include assign="btn_add" file="generic/button.tpl" href=$link_ipaddr_rev_add content="`$lang.add`"
                 	class="btn-success btn-sm" glyph="plus-sign"}
                 {include file=generic/section-level3.tpl title="`$lang.ip_addresses_rev`" buttons="`$btn_add`" content=$table_ipaddr_rev}
                 	
-                {include assign="btn_add" file="generic/button.tpl" href=$link_cname_add content="`$lang.ip_cname_add`"
+                {include assign="btn_add" file="generic/button.tpl" href=$link_cname_add content="`$lang.add`"
                         class="btn-success btn-sm" glyph="plus-sign"}
                 {include file=generic/section-level3.tpl title="`$lang.ip_cnames`" buttons="`$btn_add`" content=$table_cname}
 
@@ -86,7 +86,7 @@
 			class="btn-success btn-sm" glyph="envelope"}
 		{include file=generic/section-level3.tpl title="`$lang.dns_zones`" buttons="`$btn_req_for` `$btn_req_rev`" content=$table_dns}
 		
-		{include assign="btn_add" file="generic/button.tpl" href=$link_nameserver_add content="`$lang.nameserver_add`"
+		{include assign="btn_add" file="generic/button.tpl" href=$link_nameserver_add content="`$lang.add`"
 			class="btn-success btn-sm" glyph="plus-sign"}
 		{include file=generic/section-level3.tpl title="`$lang.dns_nameservers`" buttons="`$btn_add`" content=$table_nameservers}
 	</div>

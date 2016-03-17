@@ -502,6 +502,10 @@ $lang = array(
 				'title' => "Database error",
 				'body' => "A database error has occured. Please report the problem to the administrator(s)."
 			),
+			'email_invalid' => array(
+				'title' => "E-mail error",
+				'body' => "Please make sure your e-mail address is valid."
+			),
 			'not_logged_in' => array(
 				'title' => "Not logged in",
 				'body' => "This function requires that you have logged in the system. If you have not signed up to the system, you may do so in the registration section."

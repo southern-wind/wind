@@ -517,6 +517,10 @@ $lang = array(
 				'title' => "Aanmeldings fout",
 				'body' => "De opgegeven aanmeld informatie is niet juist. Controleer of u de juiste gebruikers naam en wachtwoord gebruikt."
 			),
+			'email_invalid' => array(
+				'title' => "E-mail error",
+				'body' => "Zorg ervoor dat uw e - mailadres geldig."
+			),
 			'password_not_match' => array(
 				'title' => "Wachtwoord fout",
 				'body' => "U heeft niet hetzelfde wachtwoord opgeven in beide wachtwoord velden."

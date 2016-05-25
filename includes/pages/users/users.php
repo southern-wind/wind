@@ -115,7 +115,11 @@ class users {
 		if ($_POST['users__password'] != $_POST['users__password_c']) {
 			$main->message->set_fromlang('error', 'password_not_match');
 			return;
-		}					
+		}
+		if (!filter_var($_POST['users__email'], FILTER_VALIDATE_EMAIL) === true){
+			$main->message->set_fromlang('error', 'email_invalid');
+			return;
+		}			
 		if ($_POST['users__password'] == '' && get('user') != 'add') {
 			unset($_POST['users__password']);
 		} else {

@@ -98,9 +98,9 @@ class geoimage {
 			}
 			
 			//ANTENNA B
-			if ($i == $width-2) { 
+			if ($i == $width-1) { 
 				$ant_b = $y1 - $antenna_b_se;
-				imagelinethick($image, $left_pad + $i, $y1, $left_pad + $i, $ant_b, $color_antenna, 2);
+				imagelinethick($image, $left_pad + $i, $y1, $left_pad + $i, $ant_b, $color_antenna, 3);
 			}
 		}
 		

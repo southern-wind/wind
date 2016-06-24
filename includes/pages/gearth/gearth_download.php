@@ -63,6 +63,7 @@ class gearth_download {
 			foreach ((array) $nodes as $key => $value) {
 				$xml2 = "<Placemark>";
 				$xml2 .= "<description>";
+				$xml2 .= "<![CDATA["; 
 				$xml2 .= $lang['db']['nodes__id'].": ".$value['id']."<br />";
 				$xml2 .= htmlspecialchars($value['areas__name'], ENT_COMPAT, $lang['charset'])."<br />";
 				if ($value['total_p2p'] != 0) $xml2 .= $lang['backbone']." ".$lang['links'].": ".$value['total_p2p']."<br />";
@@ -72,6 +73,7 @@ class gearth_download {
 				}
 				if ($value['total_clients'] != 0) $xml2 .= $lang['clients'].": ".$value['total_clients']."<br />";
 				$xml2 .= "<a href=\"".$vars['site']['url'].make_ref('/nodes', array("node" => $value['id'], "show_map" => "no"))."\">".$lang['node_page']."</a><br />";
+				$xml2 .= "]]>";
 				$xml2 .= "</description>";
 				$xml2 .= "<name>".htmlspecialchars($value['nodes__name'], ENT_COMPAT, $lang['charset'])."</name>\n";
 				$xml2 .= "<LookAt>\n";

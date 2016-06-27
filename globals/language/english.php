@@ -571,25 +571,25 @@ $lang = array(
 		
 	'email' => array(
 		'user_activation' => array(
-			'subject' => "Account activation: ##username##",
+			'subject' => "WiND Account activation for user: ##username##",
 			'body' => "WiND - Wireless Nodes Database\n------------------------------------------\nAccount Activation ##username##\n\nClick here: ##act_link##"
 		),
 
 		'user_restore' => array(
-			'subject' => "Password recovery: ##username##",
+			'subject' => "WiND Password recovery for user: ##username##",
 			'body' => "WiND - Wireless Nodes Database\n------------------------------------------\n\nPassword recovery for the account ##username##\n\nClick here: ##act_link##"
 		),
 
 		'user_change_email' => array(
-			'subject' => "E-mail address change: ##username##",
-			'body' => "WiND - Wireless Nodes Database\n------------------------------------------\n\nE-mail address change for account ##username##\n\nClick here: ##act_link##"
+			'subject' => "WiND e-mail address changed for user: ##username##",
+			'body' => "WiND - Wireless Nodes Database\n------------------------------------------\n\nPlease verify the new e-mail address for user: ##username##\n\nClick here: ##act_link##"
 		),
 
 		'node_contact' => array(
 			'subject_prefix' => "WiND: ",
 			'subject_suffix' => "",
 			'body_prefix' => "Contacting administrators of node ##node_name## (###node_id##).\nThe user ##username## has sent to you the following message\nthrough the application WiND - Wireless Nodes Database:\n-------------------------------------------------------------------\n\n",
-			'body_suffix' => "\n\n-------------------------------------------------------------------\nReply to this message to contact with the sender.\nWiND - Wireless Nodes Database\n-------------------------------------------------------------------"
+			'body_suffix' => "\n\n-------------------------------------------------------------------\nReply to this message to make contact with the sender.\nWiND - Wireless Nodes Database\n-------------------------------------------------------------------"
 		),
 
 		'range' => array(

@@ -462,11 +462,11 @@ $lang = array(
 			),
 			'login_success' => array(
 				'title' => "Login Successful",
-				'body' => "You were successfully identified."
+				'body' => "You were successfully logged in."
 			),
 			'restore_success' => array(
 				'title' => "Password recovery was completed",
-				'body' => "The recovery of your password was successful. To restore your password, click at the URL that has been sent to your e-mail address."
+				'body' => "The recovery of your password was successful. To restore your password, follow the link sent to your e-mail address."
 			),
 			'password_restored' => array(
 				'title' => "Password change",
@@ -478,7 +478,7 @@ $lang = array(
 			),
 			'activation_required' => array(
 				'title' => "Account activation",
-				'body' => "You account has not been activated. To activate your account, click at the activation URL that has been sent to your e-mail address."
+				'body' => "You account has not been activated. To activate your account, follow the link activation URL that has been sent to your e-mail address."
 			),
 			'activation_success' => array(
 				'title' => "Account activation",
@@ -486,7 +486,7 @@ $lang = array(
 			),
 			'message_sent' => array(
 				'title' => "Message was sent",
-				'body' => "Your message was sent successfully. Possible answer will be send by the administrators of the node, at your e-mail account defined at your profile."
+				'body' => "Your message was sent successfully. A possible reply from the administrators of the node will be sent to the e-mail address provided in your profile."
 			),
 		),
 		'error' => array(
@@ -572,61 +572,122 @@ $lang = array(
 	'email' => array(
 		'user_activation' => array(
 			'subject' => "WiND Account activation for user: ##username##",
-			'body' => "WiND - Wireless Nodes Database\n------------------------------------------\nAccount Activation ##username##\n\nClick here: ##act_link##"
+			'body' => "WiND - Wireless Nodes Database\n"
+			"------------------------------------------\n"
+			"Account Activation ##username##\n\n"
+			"Follow this link to activate your account: ##act_link##"
 		),
 
 		'user_restore' => array(
 			'subject' => "WiND Password recovery for user: ##username##",
-			'body' => "WiND - Wireless Nodes Database\n------------------------------------------\n\nPassword recovery for the account ##username##\n\nClick here: ##act_link##"
+			'body' => "WiND - Wireless Nodes Database\n"
+			"------------------------------------------\n\n"
+			"Password recovery for ##username##\n\n"
+			"Follow this link to recover your password: ##act_link##"
 		),
 
 		'user_change_email' => array(
 			'subject' => "WiND e-mail address changed for user: ##username##",
-			'body' => "WiND - Wireless Nodes Database\n------------------------------------------\n\nPlease verify the new e-mail address for user: ##username##\n\nClick here: ##act_link##"
+			'body' => "WiND - Wireless Nodes Database\n"
+			"------------------------------------------\n\n"
+			"Please verify the new e-mail address for user: ##username##\n\n"
+			"Follow this link to verify your e-mail address: ##act_link##"
 		),
 
 		'node_contact' => array(
 			'subject_prefix' => "WiND: ",
 			'subject_suffix' => "",
-			'body_prefix' => "Contacting administrators of node ##node_name## (###node_id##).\nThe user ##username## has sent to you the following message\nthrough the application WiND - Wireless Nodes Database:\n-------------------------------------------------------------------\n\n",
-			'body_suffix' => "\n\n-------------------------------------------------------------------\nReply to this message to make contact with the sender.\nWiND - Wireless Nodes Database\n-------------------------------------------------------------------"
+			'body_prefix' => "Contacting administrators of node ##node_name## (###node_id##).\n"
+			"The user ##username## has sent to you the following message\n"
+			"through the application WiND - Wireless Nodes Database:\n"
+			"-------------------------------------------------------------------\n\n",
+			'body_suffix' => "\n\n-------------------------------------------------------------------\n"
+			"Reply to this message to make contact with the sender.\n"
+			"WiND - Wireless Nodes Database\n-------------------------------------------------------------------"
 		),
 
 		'range' => array(
 			'pending' => array(
 				'subject' => "##range##: Pending",
-				'body' => "WiND - Wireless Nodes Database\n------------------------------------------\n\nIP C-Class: ##range##\nNode: ##node_name## (###node_id##)\n\nThe above IP C-Class has been queued with status 'pending'.\n\nRepresenting the WiND Hostmaster team,\n##hostmaster_surname## ##hostmaster_name## (##hostmaster_username##)"
+				'body' => "WiND - Wireless Nodes Database\n"
+				"------------------------------------------\n\n"
+				"IP C-Class: ##range##\n"
+				"Node: ##node_name## (###node_id##)\n\n"
+				"The above IP C-Class has been queued with status 'pending'.\n\n"
+				"Representing the WiND Hostmaster team,\n"
+				"##hostmaster_surname## ##hostmaster_name## (##hostmaster_username##)"
 			),
 			'active' => array(
 				'subject' => "##range##: Activated",
-				'body' => "WiND - Wireless Nodes Database\n------------------------------------------\n\nIP C-Class: ##range##\nNode: ##node_name## (###node_id##)\n\nThe above IP C-Class has been activated.\n\nRepresenting the WiND Hostmaster team,\n##hostmaster_surname## ##hostmaster_name## (##hostmaster_username##)"
+				'body' => "WiND - Wireless Nodes Database\n"
+				"------------------------------------------\n\n"
+				"IP C-Class: ##range##\n"
+				"Node: ##node_name## (###node_id##)\n\n"
+				"The above IP C-Class has been activated.\n\n"
+				"Representing the WiND Hostmaster team,\n"
+				"##hostmaster_surname## ##hostmaster_name## (##hostmaster_username##)"
 			),
 			'rejected' => array(
 				'subject' => "##range##: Rejected",
-				'body' => "WiND - Wireless Nodes Database\n------------------------------------------\n\nIP C-Class: ##range##\nNode: ##node_name## (###node_id##)\n\nThe above IP C-Class has been rejected.\n\nRepresenting the WiND Hostmaster team,\n##hostmaster_surname## ##hostmaster_name## (##hostmaster_username##)"
+				'body' => "WiND - Wireless Nodes Database\n"
+				"------------------------------------------\n\n"
+				"IP C-Class: ##range##\n"
+				"Node: ##node_name## (###node_id##)\n\n"
+				"The above IP C-Class has been rejected.\n\n"
+				"Representing the WiND Hostmaster team,\n"
+				"##hostmaster_surname## ##hostmaster_name## (##hostmaster_username##)"
 			),
 			'invalid' => array(
 				'subject' => "##range##: Invalid",
-				'body' => "WiND - Wireless Nodes Database\n------------------------------------------\n\nIP C-Class: ##range##\nNode: ##node_name## (###node_id##)\n\nThe above IP C-Class was invalid.\n\nRepresenting the WiND Hostmaster team,\n##hostmaster_surname## ##hostmaster_name## (##hostmaster_username##)"
+				'body' => "WiND - Wireless Nodes Database\n"
+				"------------------------------------------\n\n"
+				"IP C-Class: ##range##\n"
+				"Node: ##node_name## (###node_id##)\n\n"
+				"The above IP C-Class was invalid.\n\n"
+				"Representing the WiND Hostmaster team,\n"
+				"##hostmaster_surname## ##hostmaster_name## (##hostmaster_username##)"
 			)
 		),
 		
 		'zone' => array(
 			'pending' => array(
 				'subject' => "##zone##: Pending",
-				'body' => "WiND - Wireless Nodes Database\n------------------------------------------\n\nDNS zone: ##zone##\nNode: ##node_name## (###node_id##)\n\nThe above DNS zone has been queued with status 'pending'.\n\nRepresenting the WiND Hostmaster team,\n##hostmaster_surname## ##hostmaster_name## (##hostmaster_username##)"
+				'body' => "WiND - Wireless Nodes Database\n"
+				"------------------------------------------\n\n"
+				"DNS zone: ##zone##\nNode: ##node_name## (###node_id##)\n\n"
+				"The above DNS zone has been queued with status 'pending'.\n\n"
+				"Representing the WiND Hostmaster team,\n"
+				"##hostmaster_surname## ##hostmaster_name## (##hostmaster_username##)"
 			),
 			'active' => array(
 				'subject' => "##zone##: Activated",
-				'body' => "WiND - Wireless Nodes Database\n------------------------------------------\n\nDNS zone: ##zone##\nNode: ##node_name## (###node_id##)\n\nThe above DNS zone has been activated.\n\nRepresenting the WiND Hostmaster team,\n##hostmaster_surname## ##hostmaster_name## (##hostmaster_username##)"
+				'body' => "WiND - Wireless Nodes Database\n"
+				"------------------------------------------\n\n"
+				"DNS zone: ##zone##\n"
+				"Node: ##node_name## (###node_id##)\n\n"
+				"The above DNS zone has been activated.\n\n"
+				"Representing the WiND Hostmaster team,\n"
+				"##hostmaster_surname## ##hostmaster_name## (##hostmaster_username##)"
 			),
 			'rejected' => array(
 				'subject' => "##zone##: Rejected",
-				'body' => "WiND - Wireless Nodes Database\n------------------------------------------\n\nDNS zone: ##zone##\nNode: ##node_name## (###node_id##)\n\nThe above DNS zone has been rejected.\n\nRepresenting the WiND Hostmaster team,\n##hostmaster_surname## ##hostmaster_name## (##hostmaster_username##)"
+				'body' => "WiND - Wireless Nodes Database\n"
+				"------------------------------------------\n\n"
+				"DNS zone: ##zone##\n"
+				"Node: ##node_name## (###node_id##)\n\n"
+				"The above DNS zone has been rejected.\n\n"
+				"Representing the WiND Hostmaster team,\n"
+				"##hostmaster_surname## ##hostmaster_name## (##hostmaster_username##)"
 			),
 			'invalid' => array(
 				'subject' => "##zone##: Invalid",
-				'body' => "WiND - Wireless Nodes Database\n------------------------------------------\n\nDNS zone: ##zone##\nNode: ##node_name## (###node_id##)\n\nThe above DNS zone was invalid.\n\nRepresenting the WiND Hostmaster team,\n##hostmaster_surname## ##hostmaster_name## (##hostmaster_username##)"
+				'body' => "WiND - Wireless Nodes Database\n"
+				"------------------------------------------\n\n"
+				"DNS zone: ##zone##\n"
+				"Node: ##node_name## (###node_id##)\n\n"
+				"The above DNS zone was invalid.\n\n"
+				"Representing the WiND Hostmaster team,\n"
+				"##hostmaster_surname## ##hostmaster_name## (##hostmaster_username##)"
 			)
 		)
 	),

@@ -600,7 +600,7 @@ $lang = array(
 			'body_prefix' => "Contacting administrators of node ##node_name## (###node_id##).\n".
 			"The user ##username## has sent to you the following message\n".
 			"through the application WiND - Wireless Nodes Database:\n".
-			"-------------------------------------------------------------------\n\n".
+			"-------------------------------------------------------------------\n\n",
 			'body_suffix' => "\n\n-------------------------------------------------------------------\n".
 			"Reply to this message to make contact with the sender.\n".
 			"WiND - Wireless Nodes Database\n".

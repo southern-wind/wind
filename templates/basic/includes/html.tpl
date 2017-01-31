@@ -19,7 +19,7 @@
 <html lang="{$lang.iso639}">
 <head>
 	<meta charset="{$lang.charset}"/>
-	<meta id="windViewport" name="viewport" content="width = 740">
+	<meta id="windViewport" name="viewport" content="width = 1200">
         {literal}
         <script>
         if (screen.width > 740) {

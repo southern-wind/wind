@@ -147,7 +147,10 @@ NetworkMap.prototype._constructMap = function() {
 	
 	// LAYER : maps
 	//-------------------------------------------------------
-	this._olLayers['osm'] = new OpenLayers.Layer.OSM("OpenStreetMaps");
+	this._olLayers['osm'] = new OpenLayers.Layer.OSM("OpenStreetMaps",
+                ["https://a.tile.openstreetmap.org/${z}/${x}/${y}.png ",
+                "https://b.tile.openstreetmap.org/${z}/${x}/${y}.png ",
+                "https://a.tile.openstreetmap.org/${z}/${x}/${y}.png "]);
         if (typeof(google) != 'undefined')
                 this._olLayers['googleR'] = new OpenLayers.Layer.Google("Google RoadMap", {type: google.maps.MapTypeId.ROADMAP, visibility: false});
         if (typeof(google) != 'undefined')
